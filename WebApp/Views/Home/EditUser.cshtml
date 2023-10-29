@@ -1,0 +1,81 @@
+﻿@using DB.Models;
+@model User;
+
+@{
+    ViewData["Title"] = "Редактирование";
+}
+<div class="text-center">
+    <img src="~/logon.png" />
+	<h2 class="display-4">Редактирование пользователя с id = @Model.Id</h2>
+</div>
+<hr />
+<form method="post" >
+	<span class="login100-form-title p-b-15">
+                    
+                </span>
+
+                <hr class="hr-double p-b-26">
+                <span class="login100-form-title p-b-26">
+                </span>
+             <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.Surname, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="Фамилия"></span>
+            </div>
+
+              <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.Name, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="Имя"></span>
+            </div>
+
+              <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.Patronymic, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="Отчество"></span>
+            </div>
+              <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.Birthday, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="День рождения"></span>
+            </div>
+
+            <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                @*<input class="input100" type="text" name="email">*@
+                @Html.TextBoxFor(m => m.Email, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="Почта"></span>
+            </div>
+
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <span class="btn-show-pass">
+                    <i class="zmdi zmdi-eye"></i>
+                </span>
+                @*<input class="input100" type="password" name="pass">*@
+                @Html.TextBoxFor(m => m.PasswordHash, new { @class = "input100", @type = "password" })
+                <span class="focus-input100" data-placeholder="Пароль"></span>
+            </div>
+
+              <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="Номер телефона"></span>
+            </div>
+
+              <div class="wrap-input100 validate-input">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="Никнейм"></span>
+            </div>
+
+
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button  class="login100-form-btn">
+                        Сохранить
+                    </button>
+                </div>
+           </div>
+</form>
+ @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript"  charset="utf-8">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }

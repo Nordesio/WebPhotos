@@ -1,0 +1,146 @@
+﻿
+@using DB.Models;
+
+@model List<User>;
+
+@{
+    ViewData["Title"] = "AdminPanel";
+}
+<div class="text-center">
+	<h2 class="display-4">Пользователи</h2>
+</div>
+<!-- удалить, изменить юзера-->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Name <!-- удалить, изменить и т.д.-->
+            </th>
+             <th>
+                Patr  <!-- удалить, изменить и т.д.-->
+            </th>
+            <th>
+                Birthday
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                EmConf
+            </th>
+            <th>
+                PasswordHash
+            </th>
+            <th>
+                SecStamp
+            </th>
+            <th>
+                UserPhoneNumber   
+            </th>
+             <th>
+                PhNumConf
+            </th>
+            <th>
+                2fEn
+            </th>
+            <th>
+                LockEndDate
+            </th>
+            <th>
+                LockEn
+            </th>
+            <th>
+                LogFails
+            </th>
+            <th>
+                UsName
+            </th>
+            <th>
+                UsGroup
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patronymic)
+            </td>
+            <td>
+                @if(item.Birthday!=null)
+                @item.Birthday.Value.ToString("d")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordHash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecurityStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+            </td>
+            <td>
+                 @if(item.LockoutEndDateUtc!=null)
+                @item.LockoutEndDateUtc.Value.ToString("d")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LockoutEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessFailedCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserGroupId)
+            </td>
+            <td>
+                <a asp-action="UserEdit" asp-route-id="@item.Id">Edit</a> 
+                <a asp-action="UserDelete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+     </tbody>
+</table>
+    <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <a class="login100-form-btn" asp-action="ChangeHash">Поменять Hash</a>
+                </div>
+    </div>
+     @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript"  charset="utf-8">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }

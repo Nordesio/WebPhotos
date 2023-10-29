@@ -1,0 +1,30 @@
+﻿
+@{
+	
+    ViewData["Title"] = "Home page";
+
+}
+<div class="text-center">
+    <img src="~/logon.png" />
+	<h2 class="display-4">Подтверждение почты</h2>
+</div>
+
+<form method="post" >
+    <div class="text-center">
+        	<h6 class="h6">Почта успешно подтверждена</h6>
+    </div>
+               <div class="container-login100-form-btn">
+                  <div class="wrap-login100-form-btn">
+                       <div class="login100-form-bgbtn"></div>
+                    <a class="login100-form-btn" asp-action="ToCab">В личный кабинет</a>
+                    </div>
+            </div>
+</form>
+ @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript"  charset="utf-8">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }

@@ -1,0 +1,46 @@
+﻿@using DB.Models;
+@model User;
+@{
+	
+    ViewData["Title"] = "Home page";
+
+}
+<div class="text-center">
+    <img src="~/logon.png" />
+	<h2 class="display-4">Подтверждение почты</h2>
+</div>
+
+<form method="post" >
+    <div class="text-center">
+        	<h6 class="h6">На ваш email было отправленно письмо, пожалуйста, проверьте почту и введите код из письма</h6>
+    </div>
+	<span class="login100-form-title p-b-15">
+                    
+                </span>
+
+                <hr class="hr-double p-b-26">
+                <span class="login100-form-title p-b-26">
+                </span>
+	     
+               <div class="wrap-input100 validate-input" >
+                <input class="input100" type="number" name="code" id="code">
+               
+                <span class="focus-input100" data-placeholder="Код"></span>
+                </div>
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button  class="login100-form-btn">
+                        Подтверждение
+                    </button>
+                </div>
+            </div>
+</form>
+ @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript"  charset="utf-8">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }

@@ -1,8 +1,58 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using DB.Models;
+@model User;
+@{
+    ViewData["Title"] = "Authorisation";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <img src="~/logon.png" />
+	<h2 class="display-4">Авторизация</h2>
 </div>
+<form method="post" >
+	<span class="login100-form-title p-b-15">
+                    
+                </span>
+
+                <hr class="hr-double p-b-26">
+                <span class="login100-form-title p-b-26">
+                </span>
+
+            <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                @*<input class="input100" type="text" name="email">*@
+                @Html.TextBoxFor(m => m.Email, new { @class = "input100", @maxlength = "20" })
+                <span class="focus-input100" data-placeholder="Почта"></span>
+            </div>
+
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <span class="btn-show-pass">
+                    <i class="zmdi zmdi-eye"></i>
+                </span>
+                @*<input class="input100" type="password" name="pass">*@
+                @Html.TextBoxFor(m => m.PasswordHash, new { @class = "input100", @type = "password", @maxlength = "20" })
+                <span class="focus-input100" data-placeholder="Пароль"></span>
+            </div>
+             @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript"  charset="utf-8">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button  class="login100-form-btn">
+                        войти
+                    </button>
+                </div>
+            </div>
+              <div class="container-login100-form-btn">
+                  <div class="wrap-login100-form-btn">
+                       <div class="login100-form-bgbtn"></div>
+                    <a class="login100-form-btn" asp-action="Register">Регистрация</a>
+                    </div>
+            </div>
+            
+
+</form>

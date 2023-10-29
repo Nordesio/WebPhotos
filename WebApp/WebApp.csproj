@@ -6,4 +6,26 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\css\main.css" />
+    <Content Remove="wwwroot\css\util.css" />
+    <Content Remove="wwwroot\log.png" />
+    <Content Remove="wwwroot\logon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\main.css" />
+    <None Include="wwwroot\css\util.css" />
+    <None Include="wwwroot\log.png" />
+    <None Include="wwwroot\logon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EO.WebBrowser" Version="23.2.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KPO_Cursovaya\KPO_Cursovaya.csproj" />
+  </ItemGroup>
+
 </Project>
