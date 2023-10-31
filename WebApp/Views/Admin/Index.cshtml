@@ -1,5 +1,5 @@
 ﻿
-@using DB.Models;
+@using KPO_Cursovaya.Models;
 
 @model List<User>;
 
@@ -17,52 +17,16 @@
                 Id
             </th>
             <th>
-                Surname
-            </th>
-            <th>
                 Name <!-- удалить, изменить и т.д.-->
-            </th>
-             <th>
-                Patr  <!-- удалить, изменить и т.д.-->
-            </th>
-            <th>
-                Birthday
             </th>
             <th>
                 Email
             </th>
             <th>
-                EmConf
+                EmailConfirmed
             </th>
             <th>
-                PasswordHash
-            </th>
-            <th>
-                SecStamp
-            </th>
-            <th>
-                UserPhoneNumber   
-            </th>
-             <th>
-                PhNumConf
-            </th>
-            <th>
-                2fEn
-            </th>
-            <th>
-                LockEndDate
-            </th>
-            <th>
-                LockEn
-            </th>
-            <th>
-                LogFails
-            </th>
-            <th>
-                UsName
-            </th>
-            <th>
-                UsGroup
+                Password
             </th>
         </tr>
     </thead>
@@ -72,18 +36,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td>
              <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patronymic)
-            </td>
-            <td>
-                @if(item.Birthday!=null)
-                @item.Birthday.Value.ToString("d")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -92,35 +46,7 @@
                 @Html.DisplayFor(modelItem => item.EmailConfirmed)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PasswordHash)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecurityStamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-            </td>
-            <td>
-                 @if(item.LockoutEndDateUtc!=null)
-                @item.LockoutEndDateUtc.Value.ToString("d")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LockoutEnabled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccessFailedCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserGroupId)
+                @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
                 <a asp-action="UserEdit" asp-route-id="@item.Id">Edit</a> 

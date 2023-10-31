@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DB.Models;
-namespace DB.StorageInterfaces
+using KPO_Cursovaya.Models;
+namespace KPO_Cursovaya.StorageInterfaces
 {
     public interface IUserStorage
     {
         void InsertUser(User user);
-
+        string GetRoleByEmail(User user);
         void Update(User user);
         List<User> GetFullList();
         string GetRole(User user);
-        User GetById(string id);
+        User GetById(int id);
         User GetByEmail(User user);
         User GetByEmailAndPass(User user);
-        
 
-        void Delete(string id);
+
+        void Delete(int id);
 
         void Delete(User user);
     }

@@ -4,52 +4,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KPO_Cursovaya.Models;
-using KPO_Cursovaya.StorageInterfaces;
+
 namespace KPO_Cursovaya.Implements
 {
-    public class RoleStorage : IRoleStorage
+    public class VkuserStorage
     {
-        public void Insert(Role role)
+        public void Insert(Vkuser vkuser)
         {
             using var db = new DiplomContext();
-            db.Roles.Add(role);
+            db.Vkusers.Add(vkuser);
             db.SaveChanges();
         }
-        public void Update(Role role)
+        public void Update(Vkuser vkuser)
         {
             using var db = new DiplomContext();
-            var element = db.Roles.FirstOrDefault(rec => rec.Id == role.Id);
+            var element = db.Vkusers.FirstOrDefault(rec => rec.Id == vkuser.Id);
             if (element == null)
                 throw new Exception("Не найдено");
-            CreateModel(role, element);
+            CreateModel(vkuser, element);
             db.SaveChanges();
         }
-        private Role CreateModel(Role model, Role role)
+        private Vkuser CreateModel(Vkuser model, Vkuser vkuser)
         {
-            role.Name = model.Name;
-            return role;
+            vkuser.Url = model.Url;
+            return vkuser;
 
         }
-        public List<Role> GetFullList()
+        public List<Vkuser> GetFullList()
         {
             using var db = new DiplomContext();
-            return db.Roles.ToList();
+            return db.Vkusers.ToList();
         }
-        public Role GetById(int id)
+        public Vkuser GetById(string id)
         {
             using var db = new DiplomContext();
-            return db.Roles.Find(id);
+            return db.Vkusers.Find(id);
         }
-        public void Delete(int id)
+        public void Delete(string id)
         {
             using var db = new DiplomContext();
-            db.Roles.Remove(db.Roles.Find(id));
+            db.Vkusers.Remove(db.Vkusers.Find(id));
             db.SaveChanges();
         }
-        public void Delete(Role role)
+        public void Delete(Vkuser vkuser)
         {
             using var db = new DiplomContext();
-            db.Roles.Remove(role);
+            db.Vkusers.Remove(vkuser);
             db.SaveChanges();
         }
     }

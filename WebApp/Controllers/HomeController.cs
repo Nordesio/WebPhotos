@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
-using DB.Implements;
-using DB.StorageInterfaces;
-using DB.Models;
+using KPO_Cursovaya.StorageInterfaces;
+using KPO_Cursovaya.Models;
+using KPO_Cursovaya.Implements;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,96 +11,28 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Net;
 using EO.WebBrowser.DOM;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IUserStorage _userStorage;
+        private readonly IRoleStorage _roleStorage;
         public static User auth_user = null;
         private static User pre_registration_user;
         private static int code_ver;
-        public static string pass = "12345";
-        public static string zero_patient = "test411";
-        public static string hash_func = "90";
-        private static string hash = "complex_key_2212101321";
-        private static string EncryptionKey = "MAKV2SPBNI99212";
         public static string role;
-        public static string Encrypt(string clearText)
-        {
-            
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
-                    }
-                    clearText = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-            return clearText;
-        }
+        public static int logged = 0;
 
-        public static string Decrypt(string cipherText)
-        {
-            
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
-                    }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
-                }
-            }
-            return cipherText;
-        }
-
-        private static string dehashPasswordmd5(string pass)
-        {
-            byte[] data = Convert.FromBase64String(pass); // decrypt the incrypted text
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-            {
-                byte[] keys = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
-                using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
-                {
-                    ICryptoTransform transform = tripDes.CreateDecryptor();
-                    byte[] results = transform.TransformFinalBlock(data, 0, data.Length);
-                    return UTF8Encoding.UTF8.GetString(results);
-                }
-            }
-        }
-        private static string hashPasswordmd5(string pass)
-        {
-            byte[] data = UTF8Encoding.UTF8.GetBytes(pass);
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-            {
-                byte[] keys = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
-                using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
-                {
-                    ICryptoTransform transform = tripDes.CreateEncryptor();
-                    byte[] results = transform.TransformFinalBlock(data, 0, data.Length);
-                    return Convert.ToBase64String(results, 0, results.Length);
-                }
-            }
-        }
-        public HomeController(IUserStorage userStorage)
+        public HomeController(IUserStorage userStorage, IRoleStorage roleStorage)
         {
             _userStorage = userStorage;
+            _roleStorage = roleStorage;
+         
         }
     
         public IActionResult Index()
@@ -125,21 +57,13 @@ namespace WebApp.Controllers
         }
       
         [HttpPost]
-        public async Task<IActionResult> Index(string Email, string PasswordHash)
+        public async Task<IActionResult> Index(string Email, string Password)
         {
-            if(Email != null && PasswordHash != null)
+            if(Email != null && Password != null)
             {
                 User user = new User();
-                if (hash_func.Equals("md5"))
-                {
-                    user.PasswordHash = hashPasswordmd5(PasswordHash);
-                }
-                if (hash_func.Equals("PBKDF2"))
-                {
-                    user.PasswordHash = Encrypt(PasswordHash);
-                }
                 user.Email = Email;
-               
+                user.Password = Password;
                 auth_user = _userStorage.GetByEmailAndPass(user);
                 if(auth_user == null)
                 {
@@ -150,6 +74,8 @@ namespace WebApp.Controllers
 
                 }
                 role = _userStorage.GetRole(auth_user);
+                logged = 1;
+                await Authenticate(user); // аутентификация
                 return RedirectToAction(nameof(Info));
             }
             else
@@ -178,18 +104,14 @@ namespace WebApp.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Register(string id, string surname, string name, string patronymic, string birthday, string email,
-            string passwordHash, string phoneNumber, string userName)
+        public async Task<IActionResult> Register(string name,string email, string password, string pass_repeat)
         {
-            if(surname != null && name != null && patronymic != null && birthday != null && email != null && passwordHash != null && phoneNumber != null && userName != null)
+            if(name != null  && email != null && password != null)
             {
                 Random rnd = new Random();
                 User user = new User();
-                user.Id = id;
-                user.Surname = surname;
                 user.Name = name;
-                user.Patronymic = patronymic;
-                user.Birthday = DateOnly.ParseExact(birthday, "dd/MM/yyyy", null);
+                user.Password = password;
                 if (IsValid(email))
                 {
                     user.Email = email;
@@ -200,27 +122,11 @@ namespace WebApp.Controllers
                     return Register();
                     //throw new Exception("Неверный формат почты");
                 }
-                if (hash_func.Equals("md5"))
+                if (password != pass_repeat)
                 {
-                    user.PasswordHash = hashPasswordmd5(passwordHash);
-                }
-                if (hash_func.Equals("PBKDF2"))
-                {
-                    user.PasswordHash = Encrypt(passwordHash);
-                }
-                Regex validatePhoneNumberRegex = new Regex("^\\+?[1-9][0-9]{7,14}$");
-                if (validatePhoneNumberRegex.IsMatch(phoneNumber))
-                {
-                    user.PhoneNumber = phoneNumber;
-
-                }
-                else
-                {
-                    ViewBag.Message = "Wrong phone number format";
+                    ViewBag.Message = "Password doesn't match";
                     return Register();
-                    //throw new Exception("Неверный формат номера телефона");
                 }
-                user.UserName = userName;
                 User _user = new User();
                 _user = _userStorage.GetByEmail(user);
                 if (_user != null)
@@ -245,19 +151,20 @@ namespace WebApp.Controllers
             }
            
         }
- 
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            logged = 0;
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Registration()
         {
             return View();
         }
+        [Authorize(Roles = "user, admin")]
         public IActionResult Info()
         {
-            if(auth_user == null)
-            {
-                ViewBag.Message = "You are not authorised";
-                return Info();
-               // throw new Exception("Вы не авторизованы!");
-            }
+      
             return View(auth_user);
         }
         [HttpPost]
@@ -270,11 +177,18 @@ namespace WebApp.Controllers
             return View(auth_user);
         }
         [HttpPost]
-        public IActionResult EditUser(User user)
+        public IActionResult EditUser(string password, string pass_repeat)
         {
+            User user = new User();
+            if (password != pass_repeat)
+            {
+                ViewBag.Message = "Password doesn't match";
+                return EditUser();
+            }
             user.Id = auth_user.Id;
+            user.Password = password;
             _userStorage.Update(user);
-            auth_user = user;
+            auth_user = _userStorage.GetById(user.Id);
             return RedirectToAction(nameof(Info));
         }
 
@@ -303,6 +217,7 @@ namespace WebApp.Controllers
         }
         public IActionResult Success()
         {
+            logged = 1;
             pre_registration_user.EmailConfirmed = true;
             _userStorage.InsertUser(pre_registration_user);
             auth_user = pre_registration_user;
@@ -312,5 +227,19 @@ namespace WebApp.Controllers
         {
             return RedirectToAction(nameof(Info));
         }
-    }
+        private async Task Authenticate(User user)
+        {
+            // создаем один claim
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, _userStorage.GetRoleByEmail(user))
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+    } 
 }
