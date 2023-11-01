@@ -1,0 +1,188 @@
+﻿@using KPO_Cursovaya.Models;
+@model IEnumerable<Vkuser>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<script type="text/javascript">
+    function chkbx(es) {
+        if (es.value == "on")
+            var sent = "true";
+        else
+            var sent = "false";
+        var url = es.id;
+        var urlStr = "/Search/ChkbxTg/" + "?idtheme=" + url + "&tg=" + sent;
+
+        $.ajax({
+            type: "POST",
+            url: urlStr,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            //success: successFunc
+        })
+    };
+</script>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/Loader.css">
+    <meta name="viewport" content="width=device-width" />
+    <title>Список тем</title>
+</head>
+
+<body>
+    @foreach (var item in Model)
+    {
+        string bcolorSpinner = "";
+        string bcolor = "";
+        string opacity = "1";
+        if (item.Status != "completed")
+        {
+            bcolor = "rgba(70, 178, 255, 0.1)";
+            opacity = "0.5";
+            bcolorSpinner = "rgba(70, 178, 255, 0)";
+        }
+        else if (item.Status != "completed")
+        {
+            opacity = "0.5";
+        }
+        if (User.IsInRole("Администратор системы"))
+        {
+
+            <div class="dataPanel search_theme" disabled="disabled" data-theme-id="@item.Id" style="height:auto; padding:0px; margin-bottom:10px; position: relative; background-color:@(bcolor); opacity:@(opacity)">
+                @if (item.Status != "completed")
+                {
+                    <div class="loader" style="background-color:@(bcolorSpinner)">
+                        <div class="inner one" style="opacity: 1;"></div>
+                        <div class="inner two" style="opacity: 1;"></div>
+                        <div class="inner three" style="opacity: 1;"></div>
+                    </div>
+                }
+                <table border="0" style="border-collapse: collapse; width:100%; height: 100%">
+                    <tr>
+                        <td style="height:40px">
+
+                                    <img class="picTheme" src="~/Content/images/icon-254.png" width="20" height="20" />
+                            <h4 class="dataTitle" style="margin-top:0px">
+                                <a href="@Url.Action("ThemeResult", "Search", new { theme_id = item.Id })">
+                                    @item.Url
+                                </a>
+                            </h4>
+                        </td>
+                       </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td style="height:30px">
+
+                            <h5 class="dataContText" style="margin-top:0px">
+                                <blockquot>Обновлено:</blockquot>
+                                <blockquot class="dataContText" style="color:black">@item.Date.Value</blockquot>
+                                @*<blockquot style="margin:0 0 0 30px">Получать уведомления в телеграм:</blockquot>*@
+                               
+                            </h5>
+
+                        </td>
+                        <td colspan="3" align="right">
+                                <a href="@Url.Action("EditThemeImages", new {themeId = item.Id})" class="linkText img_text_link">
+                                    <img class="picEdit" src="~/Content/images/cog.png" width="16" height="16" />
+                                    <span>Изменить</span>
+                                </a>
+
+                            <span class="stop_theme img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
+                                <img class="picEdit" src="~/Content/images/control_pause.png" width="16" height="16" />
+                                <span>Остановить</span>
+                            </span>
+
+                            <span class="start_theme img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
+                                <img class="picEdit" src="~/Content/images/control_play.png" width="16" height="16" />
+                                <span>Перезапустить</span>
+                            </span>
+
+                            <a href="@Url.Action("DeleteTheme", "Search", new { theme_id = item.Id })" class="img_text_link">
+                                <img class="picEdit" src="~/Content/images/cross.png" width="16" height="16" />
+                                <span>Удалить</span>
+                            </a>
+                            <span style="padding-right:10px"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+        else
+        {
+                <div class="dataPanel search_theme" disabled="disabled" data-theme-id="@item.Id" style="height:auto; padding:0px; margin-bottom:10px; position: relative; background-color:@(bcolor); opacity:@(opacity)">
+                    @if (item.Status != "completed")
+                    {
+                        <div class="loader" style="background-color:@(bcolorSpinner)">
+                            <div class="inner one" style="opacity: 1;"></div>
+                            <div class="inner two" style="opacity: 1;"></div>
+                            <div class="inner three" style="opacity: 1;"></div>
+                        </div>
+                    }
+                    <table border="0" style="border-collapse: collapse; width:100%; height: 100%">
+                        <tr>
+                            <td style="height:40px">
+                                        <img class="picTheme" src="~/Content/images/icon-254.png" width="20" height="20" />
+                                }
+                                <h4 class="dataTitle" style="margin-top:0px">
+                                    <a href="@Url.Action("ThemeResult", "Search", new { theme_id = item.Id })">
+                                        @item.Url
+                                    </a>
+                                </h4>
+                            </td>
+                        </tr>
+                     @*   <tr>
+                            <td valign="top">
+                                <h5 class="dataContText" style="margin-top:0px">
+                           
+                                </h5>
+
+
+
+                            </td>
+                        </tr>*@
+
+                        <tr>
+
+                            <td style="height:30px">
+                                <h5 class="dataContText" style="margin-top:0px">
+                                    <blockquot>Обновлено:</blockquot>
+                                    <blockquot class="dataContText" style="color:black">@item.Date.Value</blockquot>
+                                
+                                </h5>
+                            </td>
+
+
+
+                            <td colspan="3" align="right">
+
+                                <a href="@Url.Action("UpdateTheme", new { id = item.Id })" class="linkText img_text_link">
+                                    <img class="picEdit" src="~/Content/images/cog.png" width="16" height="16" />
+                                    <span>Изменить</span>
+                                </a>
+
+                                <span class="stop_theme img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
+                                    <img class="picEdit" src="~/Content/images/control_pause.png" width="16" height="16" />
+                                    <span>Остановить</span>
+                                </span>
+
+                                <span class="start_theme img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
+                                    <img class="picEdit" src="~/Content/images/control_play.png" width="16" height="16" />
+                                    <span>Перезапустить</span>
+                                </span>
+
+                                <a href="@Url.Action("DeleteTheme", "Search", new { theme_id = item.Id })" class="img_text_link">
+                                    <img class="picEdit" src="~/Content/images/cross.png" width="16" height="16" />
+                                    <span>Удалить</span>
+                                </a>
+                                <span style="padding-right:10px"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        
+    }
+</body>
+</html>

@@ -71,6 +71,8 @@ public partial class DiplomContext : DbContext
             entity.ToTable("VKuser");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Url).HasColumnName("url");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 

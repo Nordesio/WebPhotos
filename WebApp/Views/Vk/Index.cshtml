@@ -1,0 +1,30 @@
+﻿@using KPO_Cursovaya.Models;
+@model IEnumerable<Vkuser>
+@{ 
+ViewBag.Title = "Темы поиска";
+}
+<head>
+    <link rel="stylesheet" href="~/css/content.css">
+</head>
+<div class="themes">
+
+    <h2 class="сTit" style="padding-bottom: 5px">
+        @ViewBag.Title
+        @*<i class="fa fa-sort-amount-asc" aria-hidden="true"></i>*@
+       
+            <a href="@Url.Action("AddTheme", "Search")" class="btn btn-primary" title="Добавить новую тему" style="float:right;"><span class="glyphicon glyphicon-plus"></span> Добавить тему</a>
+    </h2> 
+    <div id="mentions_container">
+        @Html.Partial("ThemesList", Model)
+    </div>
+    @if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+       alert('@TempData["alertMessage"]');
+        </script>
+    }
+</div>
+
+
+
+

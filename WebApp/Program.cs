@@ -17,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUserStorage, UserStorage>();
 builder.Services.AddTransient<IRoleStorage, RoleStorage>();
+builder.Services.AddTransient<IVkuserStorage, VkuserStorage > ();
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KPO_Cursovaya.Models;
-
+using KPO_Cursovaya.StorageInterfaces;
 namespace KPO_Cursovaya.Implements
 {
-    public class VkuserStorage
+    public class VkuserStorage : IVkuserStorage
     {
         public void Insert(Vkuser vkuser)
         {
@@ -35,12 +35,12 @@ namespace KPO_Cursovaya.Implements
             using var db = new DiplomContext();
             return db.Vkusers.ToList();
         }
-        public Vkuser GetById(string id)
+        public List<Vkuser> GetListByUser(int id)
         {
             using var db = new DiplomContext();
-            return db.Vkusers.Find(id);
+            return db.Vkusers.Where(c => c.UserId == id).ToList();
         }
-        public void Delete(string id)
+        public void Delete(int id)
         {
             using var db = new DiplomContext();
             db.Vkusers.Remove(db.Vkusers.Find(id));

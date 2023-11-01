@@ -21,18 +21,15 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IUserStorage _userStorage;
-        private readonly IRoleStorage _roleStorage;
         public static User auth_user = null;
         private static User pre_registration_user;
         private static int code_ver;
         public static string role;
         public static int logged = 0;
 
-        public HomeController(IUserStorage userStorage, IRoleStorage roleStorage)
+        public HomeController(IUserStorage userStorage)
         {
-            _userStorage = userStorage;
-            _roleStorage = roleStorage;
-         
+            _userStorage = userStorage;       
         }
     
         public IActionResult Index()
