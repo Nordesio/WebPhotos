@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using KPO_Cursovaya.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
 namespace KPO_Cursovaya;
 
 public partial class DiplomContext : DbContext
@@ -52,9 +49,7 @@ public partial class DiplomContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("Roles_pkey");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Name).HasName("Roles_pkey");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -64,22 +59,9 @@ public partial class DiplomContext : DbContext
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.EmailConfirmed).HasColumnName("Email_confirmed");
 
-            entity.HasMany(d => d.Roles).WithMany(p => p.Users)
-                .UsingEntity<Dictionary<string, object>>(
-                    "UserRole",
-                    r => r.HasOne<Role>().WithMany()
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("role_id_id"),
-                    l => l.HasOne<User>().WithMany()
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("user_id_id"),
-                    j =>
-                    {
-                        j.HasKey("UserId", "RoleId").HasName("UserRoles_pkey");
-                        j.ToTable("UserRoles");
-                        j.IndexerProperty<int>("UserId").HasColumnName("user_id");
-                        j.IndexerProperty<int>("RoleId").HasColumnName("role_id");
-                    });
+            entity.HasOne(d => d.RoleNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.Role)
+                .HasConstraintName("role_name");
         });
 
         modelBuilder.Entity<Vkuser>(entity =>

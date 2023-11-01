@@ -9,10 +9,10 @@ namespace KPO_Cursovaya.StorageInterfaces
     public interface IUserStorage
     {
         void InsertUser(User user);
-        string GetRoleByEmail(User user);
+      
         void Update(User user);
         List<User> GetFullList();
-        string GetRole(User user);
+       
         User GetById(int id);
         User GetByEmail(User user);
         User GetByEmailAndPass(User user);

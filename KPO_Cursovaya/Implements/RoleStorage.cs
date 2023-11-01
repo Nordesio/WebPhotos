@@ -18,7 +18,7 @@ namespace KPO_Cursovaya.Implements
         public void Update(Role role)
         {
             using var db = new DiplomContext();
-            var element = db.Roles.FirstOrDefault(rec => rec.Id == role.Id);
+            var element = db.Roles.FirstOrDefault(rec => rec.Name == role.Name);
             if (element == null)
                 throw new Exception("Не найдено");
             CreateModel(role, element);

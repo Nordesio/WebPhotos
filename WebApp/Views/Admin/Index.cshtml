@@ -14,28 +14,25 @@
     <thead>
         <tr>
             <th>
-                Id
+                Имя <!-- удалить, изменить и т.д.-->
             </th>
             <th>
-                Name <!-- удалить, изменить и т.д.-->
+                Почта
             </th>
             <th>
-                Email
+                Подтверждение почты
             </th>
             <th>
-                EmailConfirmed
+                Пароль
             </th>
             <th>
-                Password
+                Роль
             </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
              <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -48,6 +45,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
             <td>
                 <a asp-action="UserEdit" asp-route-id="@item.Id">Edit</a> 
                 <a asp-action="UserDelete" asp-route-id="@item.Id">Delete</a>
@@ -59,7 +59,7 @@
     <div class="container-login100-form-btn">
                 <div class="wrap-login100-form-btn">
                     <div class="login100-form-bgbtn"></div>
-                    <a class="login100-form-btn" asp-action="ChangeHash">Поменять Hash</a>
+                    <a class="login100-form-btn" asp-action="ChangeHash">Что-то буедет делать :)</a>
                 </div>
     </div>
      @if (ViewBag.Message != null)

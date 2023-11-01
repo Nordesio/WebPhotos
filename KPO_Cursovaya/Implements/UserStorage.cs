@@ -13,39 +13,9 @@ namespace KPO_Cursovaya.Implements
         public void InsertUser(User user)
         {
             using var db = new DiplomContext();
-            user.Roles.Add(db.Roles.Find(2));
+            user.Role = "user";
             db.Users.Add(user);
             db.SaveChanges();
-        }
-        public string GetRoleByEmail(User user)
-        {
-            using var db = new DiplomContext();
-            var users = db.Users.Include(c => c.Roles).Where(rec => rec.Email == user.Email).ToList();
-            string role = "";
-            foreach (var u in users)
-            {
-                foreach (Role r in u.Roles)
-                {
-                    role = r.Name;
-                }
-            }
-            return role;
-
-        }
-        public string GetRole(User user)
-        {
-            using var db = new DiplomContext();
-            var users = db.Users.Include(c => c.Roles).Where(rec => rec.Id == user.Id).ToList();
-            string role = "";
-            foreach (var u in users)
-            {
-                foreach (Role r in u.Roles)
-                {
-                    role = r.Name;
-                }
-            }
-            return role;
-
         }
         public void Update(User user)
         {
@@ -68,7 +38,7 @@ namespace KPO_Cursovaya.Implements
         public void InsertAdmin(User user)
         {
             using var db = new DiplomContext();
-            user.Roles.Add(db.Roles.Find("admin"));
+            user.Role = "admin";
             db.Users.Add(user);
             db.SaveChanges();
         }

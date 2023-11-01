@@ -73,9 +73,9 @@ namespace WebApp.Controllers
                     //throw new Exception("Такого пользователя не существует");
 
                 }
-                role = _userStorage.GetRole(auth_user);
+                role = auth_user.Role;
                 logged = 1;
-                await Authenticate(user); // аутентификация
+                await Authenticate(auth_user); // аутентификация
                 return RedirectToAction(nameof(Info));
             }
             else
@@ -112,6 +112,7 @@ namespace WebApp.Controllers
                 User user = new User();
                 user.Name = name;
                 user.Password = password;
+                user.Role = "user";
                 if (IsValid(email))
                 {
                     user.Email = email;
@@ -137,6 +138,7 @@ namespace WebApp.Controllers
 
                 }
                 pre_registration_user = user;
+                Authenticate(pre_registration_user);
                 code_ver = rnd.Next(100000);
                 var mail = DB.SendMessage.CreateMail(pre_registration_user.Email, code_ver);
                 DB.SendMessage.SendMail(mail);
@@ -152,9 +154,10 @@ namespace WebApp.Controllers
            
         }
         [HttpGet]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
             logged = 0;
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Registration()
@@ -172,6 +175,8 @@ namespace WebApp.Controllers
         {
             return RedirectToAction(nameof(EditUser));
         }
+        [Authorize(Roles = "user, admin")]
+        [HttpGet]
         public IActionResult EditUser()
         {
             return View(auth_user);
@@ -197,6 +202,8 @@ namespace WebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Authorize(Roles = "user, admin")]
+        [HttpGet]
         public IActionResult DoubleAuth()
         {
             return View();
@@ -215,6 +222,8 @@ namespace WebApp.Controllers
                 //throw new Exception("Неверный код");
             }
         }
+        [Authorize(Roles = "user, admin")]
+        [HttpGet]
         public IActionResult Success()
         {
             logged = 1;
@@ -233,13 +242,12 @@ namespace WebApp.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, _userStorage.GetRoleByEmail(user))
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
             };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+            var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+            await HttpContext.SignInAsync(claimsPrincipal);
+         
         }
     } 
 }

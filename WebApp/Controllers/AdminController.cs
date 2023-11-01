@@ -7,6 +7,10 @@ using KPO_Cursovaya.StorageInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
 using System.Text;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace WebApp.Controllers
 {
     public class AdminController : Controller
@@ -19,6 +23,7 @@ namespace WebApp.Controllers
         {
             _userStorage = userStorage;
         }
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -29,7 +34,7 @@ namespace WebApp.Controllers
                 return Index();
                 //throw new Exception("Вы не авторизованы!");
             }
-            if (_userStorage.GetRole(auth_user_admin) == "user")
+            if (auth_user_admin.Role == "user")
             {
                 ViewBag.Message = "You aren't admin";
                 return Index();
@@ -38,8 +43,8 @@ namespace WebApp.Controllers
           
             return View(_userStorage.GetFullList());
         }
-    
-     
+
+
         /*
         [HttpGet]
         public async Task<IActionResult> UserDelele(string? id, string? surname, string? patronymic, DateOnly? birthday, string? email, bool emailConfirmed, string? passwordHash,
@@ -66,6 +71,7 @@ namespace WebApp.Controllers
             return View(model);
         }
         */
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> UserDelete(int Id)
         {
@@ -78,6 +84,7 @@ namespace WebApp.Controllers
             _userStorage.Delete(user);
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> UserEdit(int Id)
         {
