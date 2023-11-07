@@ -33,17 +33,18 @@ public partial class DiplomContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("Requests_pkey");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.Author).HasColumnName("author");
             entity.Property(e => e.AuthorId).HasColumnName("author_id");
             entity.Property(e => e.AuthorLink).HasColumnName("author_link");
             entity.Property(e => e.Date).HasColumnName("date");
-            entity.Property(e => e.RequestId).HasColumnName("request_id");
+            entity.Property(e => e.ImageByte).HasColumnName("image_byte");
             entity.Property(e => e.Text).HasColumnName("text");
             entity.Property(e => e.Url).HasColumnName("url");
+            entity.Property(e => e.VkuserId).HasColumnName("vkuser_id");
 
-            entity.HasOne(d => d.RequestNavigation).WithMany(p => p.Requests)
-                .HasForeignKey(d => d.RequestId)
+            entity.HasOne(d => d.Vkuser).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.VkuserId)
                 .HasConstraintName("request_id_id");
         });
 
@@ -56,7 +57,7 @@ public partial class DiplomContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("Users_pkey");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.EmailConfirmed).HasColumnName("Email_confirmed");
 
             entity.HasOne(d => d.RoleNavigation).WithMany(p => p.Users)
@@ -70,7 +71,7 @@ public partial class DiplomContext : DbContext
 
             entity.ToTable("VKuser");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Url).HasColumnName("url");

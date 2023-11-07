@@ -7,7 +7,7 @@ public partial class Request
 {
     public int Id { get; set; }
 
-    public int RequestId { get; set; }
+    public int VkuserId { get; set; }
 
     public DateOnly? Date { get; set; }
 
@@ -21,5 +21,7 @@ public partial class Request
 
     public string? AuthorLink { get; set; }
 
-    public virtual Vkuser RequestNavigation { get; set; } = null!;
+    public byte[]? ImageByte { get; set; }
+
+    public virtual Vkuser Vkuser { get; set; } = null!;
 }

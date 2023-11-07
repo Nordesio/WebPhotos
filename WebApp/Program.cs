@@ -18,7 +18,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUserStorage, UserStorage>();
 builder.Services.AddTransient<IRoleStorage, RoleStorage>();
 builder.Services.AddTransient<IVkuserStorage, VkuserStorage > ();
+builder.Services.AddTransient<IRequestStorage, RequestStorage>();
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {

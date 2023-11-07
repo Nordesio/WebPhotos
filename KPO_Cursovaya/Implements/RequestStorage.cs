@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KPO_Cursovaya.Models;
+using KPO_Cursovaya.StorageInterfaces;
 
 namespace KPO_Cursovaya.Implements
 {
-    public class RequestStorage
+    public class RequestStorage : IRequestStorage
     {
         public void Insert(Request request)
         {
@@ -40,12 +41,18 @@ namespace KPO_Cursovaya.Implements
             using var db = new DiplomContext();
             return db.Requests.ToList();
         }
-        public Request GetById(string id)
+        public List<Request> GetByVkId(int id)
         {
             using var db = new DiplomContext();
-            return db.Requests.Find(id);
+            return db.Requests.Where(c => c.VkuserId == id).ToList();
         }
-        public void Delete(string id)
+        public void AddFullList(List<Request> req)
+        {
+            using var db = new DiplomContext();
+            db.Requests.AddRange(req);
+            db.SaveChanges();
+        }
+        public void Delete(int id)
         {
             using var db = new DiplomContext();
             db.Requests.Remove(db.Requests.Find(id));

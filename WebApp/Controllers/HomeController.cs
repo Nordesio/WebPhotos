@@ -10,7 +10,6 @@ using System.Text;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Net;
-using EO.WebBrowser.DOM;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
@@ -154,6 +153,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> Logout()
         {
             logged = 0;
+            role = "";
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(Index));
         }
