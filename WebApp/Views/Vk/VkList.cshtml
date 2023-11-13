@@ -5,24 +5,7 @@
 }
 
 <!DOCTYPE html>
-<script type="text/javascript">
-    function chkbx(es) {
-        if (es.value == "on")
-            var sent = "true";
-        else
-            var sent = "false";
-        var url = es.id;
-        var urlStr = "/Search/ChkbxTg/" + "?idtheme=" + url + "&tg=" + sent;
 
-        $.ajax({
-            type: "POST",
-            url: urlStr,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            //success: successFunc
-        })
-    };
-</script>
 <html>
 <head>
     <link rel="stylesheet" href="~/css/Loader.css">
@@ -46,10 +29,10 @@
         {
             opacity = "0.5";
         }
-        if (User.IsInRole("Администратор системы"))
+        if (User.IsInRole("admin"))
         {
 
-            <div class="dataPanel search_theme" disabled="disabled" data-theme-id="@item.Id" style="height:auto; padding:0px; margin-bottom:10px; position: relative; background-color:@(bcolor); opacity:@(opacity)">
+            <div class="dataPanel search_vk" disabled="disabled" data-vk-id="@item.Name" style="height:auto; padding:0px; margin-bottom:10px; position: relative; background-color:@(bcolor); opacity:@(opacity)">
                 @if (item.Status != "completed")
                 {
                     <div class="loader" style="background-color:@(bcolorSpinner)">
@@ -62,10 +45,10 @@
                     <tr>
                         <td style="height:40px">
 
-                                    <img class="picTheme" src="~/Content/images/icon-254.png" width="20" height="20" />
+                                    <img class="picTheme" src="~/found_1.png" width="20" height="20" />
                             <h4 class="dataTitle" style="margin-top:0px">
-                                <a href="@Url.Action("ThemeResult", "Vk", new { theme_id = item.Id })">
-                                    @item.Url
+                                <a href="@Url.Action("VkResult", "Vk", new { vk_id = item.Id })">
+                                    @item.Name
                                 </a>
                             </h4>
                         </td>
@@ -84,23 +67,23 @@
 
                         </td>
                         <td colspan="3" align="right">
-                                <a href="@Url.Action("EditThemeImages", new {themeId = item.Id})" class="linkText img_text_link">
-                                    <img class="picEdit" src="~/Content/images/cog.png" width="16" height="16" />
+                                <a href="@Url.Action("EditVkImages", new {vkId = item.Id})" class="linkText img_text_link">
+                                    <img class="picEdit" src="~/cog.png" width="16" height="16" />
                                     <span>Изменить</span>
                                 </a>
 
-                            <span class="stop_theme img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
-                                <img class="picEdit" src="~/Content/images/control_pause.png" width="16" height="16" />
+                            <span class="stop_vk img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
+                                <img class="picEdit" src="~/pause.png" width="16" height="16" />
                                 <span>Остановить</span>
                             </span>
 
-                            <span class="start_theme img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
-                                <img class="picEdit" src="~/Content/images/control_play.png" width="16" height="16" />
+                            <span class="start_vk img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
+                                <img class="picEdit" src="~/play.png" width="16" height="16" />
                                 <span>Перезапустить</span>
                             </span>
 
-                            <a href="@Url.Action("DeleteTheme", "Search", new { theme_id = item.Id })" class="img_text_link">
-                                <img class="picEdit" src="~/Content/images/cross.png" width="16" height="16" />
+                            <a href="@Url.Action("DeleteVkUser", "Vk", new { vk_id = item.Id })" class="img_text_link">
+                                <img class="picEdit" src="~/delete.png" width="16" height="16" />
                                 <span>Удалить</span>
                             </a>
                             <span style="padding-right:10px"></span>
@@ -111,7 +94,7 @@
         }
         else
         {
-                <div class="dataPanel search_theme" disabled="disabled" data-theme-id="@item.Id" style="height:auto; padding:0px; margin-bottom:10px; position: relative; background-color:@(bcolor); opacity:@(opacity)">
+                <div class="dataPanel search_vk" disabled="disabled" data-vk-id="@item.Name" style="height:auto; padding:0px; margin-bottom:10px; position: relative; background-color:@(bcolor); opacity:@(opacity)">
                     @if (item.Status != "completed")
                     {
                         <div class="loader" style="background-color:@(bcolorSpinner)">
@@ -123,11 +106,11 @@
                     <table border="0" style="border-collapse: collapse; width:100%; height: 100%">
                         <tr>
                             <td style="height:40px">
-                                        <img class="picTheme" src="~/Content/images/icon-254.png" width="20" height="20" />
-                                }
+                                        <img class="picTheme" src="~/found_1.png" width="20" height="20" />
+                                
                                 <h4 class="dataTitle" style="margin-top:0px">
-                                    <a href="@Url.Action("ThemeResult", "Vk", new { theme_id = item.Id })">
-                                        @item.Url
+                                    <a href="@Url.Action("VkResult", "Vk", new { vk_id = item.Id })">
+                                        @item.Name
                                     </a>
                                 </h4>
                             </td>
@@ -157,23 +140,23 @@
 
                             <td colspan="3" align="right">
 
-                                <a href="@Url.Action("UpdateTheme", new { id = item.Id })" class="linkText img_text_link">
-                                    <img class="picEdit" src="~/Content/images/cog.png" width="16" height="16" />
+                                <a href="@Url.Action("UpdateVkUser", new { id = item.Id })" class="linkText img_text_link">
+                                    <img class="picEdit" src="~/cog.png" width="16" height="16" />
                                     <span>Изменить</span>
                                 </a>
 
-                                <span class="stop_theme img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
-                                    <img class="picEdit" src="~/Content/images/control_pause.png" width="16" height="16" />
+                                <span class="stop_vk img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
+                                    <img class="picEdit" src="~/pause.png" width="16" height="16" />
                                     <span>Остановить</span>
                                 </span>
 
-                                <span class="start_theme img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
-                                    <img class="picEdit" src="~/Content/images/control_play.png" width="16" height="16" />
+                                <span class="start_vk img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
+                                    <img class="picEdit" src="~/play.png" width="16" height="16" />
                                     <span>Перезапустить</span>
                                 </span>
 
-                                <a href="@Url.Action("DeleteTheme", "Search", new { theme_id = item.Id })" class="img_text_link">
-                                    <img class="picEdit" src="~/Content/images/cross.png" width="16" height="16" />
+                                <a href="@Url.Action("DeleteVkUser", "Vk", new { vk_id = item.Id })" class="img_text_link">
+                                    <img class="picEdit" src="~/delete.png" width="16" height="16" />
                                     <span>Удалить</span>
                                 </a>
                                 <span style="padding-right:10px"></span>

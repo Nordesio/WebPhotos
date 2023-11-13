@@ -13,7 +13,7 @@ namespace KPO_Cursovaya.StorageInterfaces
         void Update(Vkuser vkuser);
         List<Vkuser> GetFullList();
         List<Vkuser> GetListByUser(int id);
-
+        Vkuser GetById(int id);
         void Delete(int id);
 
         void Delete(Vkuser vkuser);

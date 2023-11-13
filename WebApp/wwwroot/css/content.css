@@ -1,6 +1,5 @@
+
 body {
-    padding-left: 15px;
-    padding-right: 15px;
     text-align: left;
     font-family: Arial;
     font-size: 13px;
@@ -22,7 +21,7 @@ body {
     margin-top: 25px;
 }
 
-.themes {
+.vks {
     border: 0px solid #979696;
     width: 100%;
     min-width: 1000px;

@@ -17,14 +17,17 @@
     padding: 0px;
     box-sizing: border-box;
 }
-header  {
-    background-color:wheat;
+header {
+    background-color: #1c1f49;
 }
 body, html {
     font-family: Poppins-Regular, sans-serif;
-    background-color: cadetblue;
-}
+    background-color: whitesmoke;
 
+}
+lable{
+    color: black;
+}
 /*---------------------------------------------*/
 a {
     font-family: Poppins-Regular;
@@ -270,7 +273,7 @@ iframe {
 .input100 {
     font-family: Poppins-Regular;
     font-size: 20px;
-    color: #fff;
+    color: black;
     line-height: 1.2;
     display: block;
     width: 100%;
@@ -323,7 +326,7 @@ iframe {
     .focus-input100::after {
         font-family: Poppins-Regular;
         font-size: 20px;
-        color: #fff;
+        color: black;
         line-height: 1.2;
         content: attr(data-placeholder);
         display: block;
@@ -435,7 +438,7 @@ iframe {
 .login100-form-btn {
     font-family: Poppins-Medium;
     font-size: 20px;
-    color: #fff;
+    color: black;
     line-height: 1.2;
     text-transform: uppercase;
     display: -webkit-box;

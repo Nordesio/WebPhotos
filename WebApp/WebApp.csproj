@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\bootstrap.css" />
     <Content Remove="wwwroot\css\content.css" />
     <Content Remove="wwwroot\css\Loader.css" />
     <Content Remove="wwwroot\css\main.css" />
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\bootstrap.css" />
     <None Include="wwwroot\css\Loader.css" />
     <None Include="wwwroot\css\content.css" />
     <None Include="wwwroot\css\main.css" />

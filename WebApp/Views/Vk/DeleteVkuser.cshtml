@@ -1,0 +1,24 @@
+﻿@using KPO_Cursovaya.Models;
+@model Vkuser
+@{
+    ViewBag.Title = "Удаление пользователя Vk";
+}
+<head>
+    <link rel="stylesheet" href="~/css/content.css">
+   @* <link rel="stylesheet" href="~/css/bootstrap.css">*@
+    <meta name="viewport" content="width=device-width" />
+    <title>Удаление пользователя Vk</title>
+</head>
+
+
+            <div class="dataPanel2 rw" style=" color: black; height: auto; width: 100%; padding-bottom: 1.5%; margin-bottom: 1.5%">
+                <div class="row " style="padding-bottom:1%">
+                    <label style = "font-size: 30px; color:darkblue; font-weight:bolder">Вы уверены что хотите удалить следующую тему?</label>
+                    <label style = "font-size: 24px; color:darkblue;">Название: @Model.Name</label>
+                </div>
+                <div class="form-group">
+                    <a href="@Url.Action("Index", "Vk")" class="btn btn-primary"  style="float:left; margin-left:10px;"><span class="glyphicon glyphicon-plus"></span> Отмена</a>
+                     <a href="@Url.Action("DeleteConfirmed", "Vk", new {vk_id = @Model.Id})" class="btn btn-primary"  style="float:right;"><span class="glyphicon glyphicon-plus"></span>Удалить</a>
+                </div>
+            </div>
+            

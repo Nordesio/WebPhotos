@@ -15,6 +15,8 @@ public partial class Vkuser
 
     public string? Status { get; set; }
 
+    public string? Name { get; set; }
+
     public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
 
     public virtual User? User { get; set; }

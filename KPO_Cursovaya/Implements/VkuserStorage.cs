@@ -27,6 +27,8 @@ namespace KPO_Cursovaya.Implements
         private Vkuser CreateModel(Vkuser model, Vkuser vkuser)
         {
             vkuser.Url = model.Url;
+            vkuser.Status = model.Status;
+            vkuser.Name = model.Name;
             return vkuser;
 
         }
@@ -34,6 +36,11 @@ namespace KPO_Cursovaya.Implements
         {
             using var db = new DiplomContext();
             return db.Vkusers.ToList();
+        }
+        public Vkuser GetById(int id)
+        {
+            using var db = new DiplomContext();
+            return db.Vkusers.Find(id);
         }
         public List<Vkuser> GetListByUser(int id)
         {

@@ -1,0 +1,65 @@
+﻿@using KPO_Cursovaya.Models;
+@model Vkuser
+@{
+    ViewBag.Title = "Добавление пользователя Vk";
+}
+<head>
+    <link rel="stylesheet" href="~/css/content.css">
+   @* <link rel="stylesheet" href="~/css/bootstrap.css">*@
+    <meta name="viewport" content="width=device-width" />
+    <title>Создание темы</title>
+</head>
+<script type="text/javascript">
+function Synonym(es) {
+
+var name = document.getElementById("name").value;
+var id = document.getElementById("id").value;
+var urlStr = "/Vk/AddVkUser/?name=" + name + "&" + "id=" + id;
+
+$.ajax({
+type: "POST",
+url: urlStr,
+contentType: "application/json; charset=utf-8",
+dataType: "text",
+success: function (data) {
+
+document.getElementById("syn2").value = data;
+},
+error: function () {
+$("#loader").fadeOut("slow");
+}
+})
+};</script>
+<div style="font-size:28px">
+    @ViewBag.Title
+</div>
+<form method="post" >
+            <div class="dataPanel2 rw" style=" color: black; height: auto; width: 100%; padding-bottom: 1.5%; margin-bottom: 1.5%">
+                <div class="row " style="padding-bottom:1%">
+                    <label style = "font-size: 30px; color:darkblue; font-weight:bolder; margin-left:2%">Наименование пользователя</label>
+                    <div class="form-group" style="font-size: 200%; color: #428BCA; margin-left: 2%; margin-right: 2%; margin-bottom:5%;">
+                        <label  class = "control-label col-md-2" style = "margin-left:1.5%; height: auto; width: 90%;" ></label>
+                        <div style="display:block; padding-left:1%;">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Введите название темы", @style = "width: 90%" })
+                         @*   <input id = "name" class = "form-control" placeholder = "Введите название темы" style = "width: 90%"/>*@
+                            
+                       </div>
+                    </div>
+                      <label style = "font-size: 26px; color: darkblue; margin-left:2%">Ссылка на пользователя</label>
+                    <div class="form-group" style="font-size: 200%; color: #428BCA; margin-left: 2%; margin-right: 2%;">
+                        <label class = "control-label col-md-2" style = "margin-left:1.5%; height: auto; width: 90%;" ></label>
+                        <div style="display:block; padding-left:1%;">
+                             @Html.TextBoxFor(m => m.Url, new { @class = "form-control",  @placeholder = "Например, https://vk.com/1", @style = "width: 90%" })
+                          @*  <input id = "id" class = "form-control" placeholder = "Например, https://vk.com/1" style = "width: 90%"/>*@
+                            
+                       </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                 
+                  @* <input type="submit" onclick="Synonym(this)" class="btn btn-primary" style="float:right;" value ="Создать тему"/>*@
+                  <button class="btn btn-primary" style="float:right; margin-left:10px;">Создать пользователя Vk</button>
+                  <a href="@Url.Action("Index", "Vk")" class="btn btn-primary" title="Добавить новую тему" style="float:left; margin-left:10px;"><span class="glyphicon glyphicon-plus"></span> Отмена</a>
+                </div>
+            </div>
+</form>

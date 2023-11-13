@@ -6,16 +6,16 @@ ViewBag.Title = "Темы поиска";
 <head>
     <link rel="stylesheet" href="~/css/content.css">
 </head>
-<div class="themes">
+<div class="vks">
 
-    <h2 class="сTit" style="padding-bottom: 5px">
+    <h2 class="сTit" style="padding-bottom: 5px; color:black;">
         @ViewBag.Title
         @*<i class="fa fa-sort-amount-asc" aria-hidden="true"></i>*@
        
-            <a href="@Url.Action("AddTheme", "Search")" class="btn btn-primary" title="Добавить новую тему" style="float:right;"><span class="glyphicon glyphicon-plus"></span> Добавить тему</a>
+            <a href="@Url.Action("AddVkUser", "Vk")" class="btn btn-primary" title="Добавить новую тему" style="float:right;"><span class="glyphicon glyphicon-plus"></span> Добавить тему</a>
     </h2> 
     <div id="mentions_container">
-        @Html.Partial("ThemesList", Model)
+        @Html.Partial("VkList", Model)
     </div>
     @if (null != TempData["alertMessage"])
     {

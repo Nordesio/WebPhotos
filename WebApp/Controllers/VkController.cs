@@ -55,14 +55,15 @@ namespace WebApp.Controllers
             return imageSrc;
         }
 
-        public void DownloadPicsFromVkUser(int vkUserId)
+        public async Task DownloadPicsFromVkUser(Vkuser vkuser)
         {
+            
             List<Request> Requests = new List<Request>();
             string first_name = "";
             string last_name = "";
-            string https = "https://vk.com/id1";
+            string https = vkuser.Url;
             string id_stroka = https.Remove(0, 15);
-            string token = "vk1.a.YINKS4VmchHFR5uMy3cVUqihSxBE-mHF9o-Ygl3NbU3zOm4DMpcXdxTKJvkLiG8zYp2CDeseSICQL6KdT9LSF3RWrkTEo7JkY7Fky0-nyVWwKrFpTRprhknkz-npk9qAGo-i3qhhSGtUgvKdPc0guKgsxRTfpMJUORVABoTxXsHMZDZ_8FR65sG6OPUJU9JuMlYGtyzc6Q0yWT9-JxAxIQ";
+            string token = "vk1.a.j7qTt6XmHpN0toO7XpLuNC4dJ2_xk1PYZNMcVlW2_Nse0FnFfTjpkZS7fKhTnR_tTa90qYykgeEKm9HtOfEY4wg__p-Iy63ailP2r1OXZv-tTsHxB44crQPOQnzHodfkj5lRXl8QC20lpyESNNSD676yuVCab18W9-EsSenOcXH4-gf_j5vUCeR6SDSyh99xQSeFwR-6Uue9E01wTihbUw";
             int offset = 0;
             string getUserId = string.Format("https://api.vk.com/method/users.get?access_token={0}&user_ids={1}&v=5.131", token, id_stroka);
             string owner_id = "";
@@ -170,7 +171,7 @@ namespace WebApp.Controllers
                     texts = ur;
                 }
                 Request request = new Request();
-                request.VkuserId = vkUserId;
+                request.VkuserId = vkuser.Id;
                 request.Date = DateOnly.FromDateTime((DateTime)d);
                 request.Text = texts;
                 request.ImageByte = DownloadImageToByteArray(u);
@@ -246,7 +247,7 @@ namespace WebApp.Controllers
                     }
 
                     Request request = new Request();
-                    request.VkuserId = vkUserId;
+                    request.VkuserId = vkuser.Id;
                     if (d.HasValue)
                     {
                         request.Date = DateOnly.FromDateTime((DateTime)d);
@@ -266,9 +267,11 @@ namespace WebApp.Controllers
                 }
 
             }
-            
+           
             Console.WriteLine("Скачано {0} фотографий у id{1}", Requests.Count, owner_id);
             _requestStorage.AddFullList(Requests);
+            vkuser.Status = "completed";
+            _vkuserStorage.Update(vkuser);
         }
 
 
@@ -293,9 +296,9 @@ namespace WebApp.Controllers
             }
         }
         [HttpGet]
-        public ActionResult ThemeResult(int theme_id, int? id = 1)
+        public ActionResult VkResult(int vk_id, int? id = 1)
         {
-            var images = _requestStorage.GetByVkId(theme_id);
+            var images = _requestStorage.GetByVkId(vk_id);
             List<string> imagesList = new List<string>();
             foreach(var i in images)
             {
@@ -306,6 +309,55 @@ namespace WebApp.Controllers
             ViewBag.Images = imagesList;
             return View("Images", imagesList.ToPagedList(pageNumber, 30));
         }
-       
-    }
+       [HttpGet]
+       public IActionResult AddVkUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddVkUser(string Name, string Url)
+        {
+            
+            Vkuser vkuser = new Vkuser();
+            vkuser.Name = Name;
+            vkuser.Url = Url;
+            vkuser.UserId = HomeController.auth_user.Id;
+            DateTime date = DateTime.Now;
+            vkuser.Date = DateOnly.FromDateTime((DateTime)date);
+            vkuser.Status = "in_progress";
+            try
+            {
+                _vkuserStorage.Insert(vkuser);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            
+            await DownloadPicsFromVkUser(vkuser);
+            //new Thread(() => { DownloadPicsFromVkUser; })
+            return Redirect(nameof(Index));
+        }
+        [HttpGet]
+        public ActionResult DeleteVkUser(int vk_id)
+        {
+            Vkuser vkuser = new Vkuser();
+            vkuser = _vkuserStorage.GetById(vk_id);
+            return View(vkuser);
+        }
+        public ActionResult DeleteConfirmed(int vk_id)
+        {
+            _vkuserStorage.Delete(vk_id);
+            return Redirect(nameof(Index));
+        }
+    //    VkApi vkApi = new VkApi();
+    //    vkApi.Authorize(new VkNet.Model.ApiAuthParams
+    //        {
+    //            ApplicationId = 7087011,
+    //            Login = "email",
+    //            Password = "pass",
+    //            Settings = VkNet.Enums.Filters.Settings.All
+    //});
+    //        string token = vkApi.Token;
+}
 }
