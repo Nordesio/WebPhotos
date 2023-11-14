@@ -64,5 +64,11 @@ namespace KPO_Cursovaya.Implements
             db.Requests.Remove(request);
             db.SaveChanges();
         }
+        public void DeleteByVkUser(Vkuser vkuser)
+        {
+            using var db = new DiplomContext();
+            db.Requests.RemoveRange(db.Requests.Where(rec => rec.VkuserId == vkuser.Id));
+            db.SaveChanges();
+        }
     }
 }

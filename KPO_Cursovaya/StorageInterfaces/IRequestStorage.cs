@@ -18,6 +18,7 @@ namespace KPO_Cursovaya.StorageInterfaces
         void Delete(int id);
 
         void Delete(Request request);
+        void DeleteByVkUser(Vkuser vkuser);
 
         void AddFullList(List<Request> req);
     }

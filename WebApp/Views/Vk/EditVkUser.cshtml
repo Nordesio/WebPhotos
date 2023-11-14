@@ -1,7 +1,7 @@
 ﻿@using KPO_Cursovaya.Models;
 @model Vkuser
 @{
-    ViewBag.Title = "Добавление пользователя Vk";
+    ViewBag.Title = "Изменение пользователя Vk";
 }
 <head>
     <link rel="stylesheet" href="~/css/content.css">
@@ -9,10 +9,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>Создание темы</title>
 </head>
-
 <div style="font-size:28px">
     @ViewBag.Title
 </div>
+    
 <form method="post" >
             <div class="dataPanel2 rw" style=" color: black; height: auto; width: 100%; padding-bottom: 1.5%; margin-bottom: 1.5%">
                 <div class="row " style="padding-bottom:1%">
@@ -22,10 +22,13 @@
                         <div style="display:block; padding-left:1%;">
                             @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Введите название темы", @style = "width: 90%" })
                          @*   <input id = "name" class = "form-control" placeholder = "Введите название темы" style = "width: 90%"/>*@
-                            
+                             
                        </div>
+                           @Html.HiddenFor(m => m.Id)
+                           @Html.HiddenFor(m => m.Status)
                     </div>
                       <label style = "font-size: 26px; color: darkblue; margin-left:2%">Ссылка на пользователя</label>
+                      <label style = "font-size: 18px; color: red; margin-left:3%" > Важно! При изменении ссылки на пользователя будет произведена автоматическая перезагрузка фотографий!</label>
                     <div class="form-group" style="font-size: 200%; color: #428BCA; margin-left: 2%; margin-right: 2%;">
                         <label class = "control-label col-md-2" style = "margin-left:1.5%; height: auto; width: 90%;" ></label>
                         <div style="display:block; padding-left:1%;">
@@ -38,7 +41,7 @@
                 <div class="form-group">
                  
                   @* <input type="submit" onclick="Synonym(this)" class="btn btn-primary" style="float:right;" value ="Создать тему"/>*@
-                  <button class="btn btn-primary" style="float:right; margin-left:10px;">Создать пользователя Vk</button>
+                  <button class="btn btn-primary" style="float:right; margin-left:10px;">Сохранить изменения</button>
                   <a href="@Url.Action("Index", "Vk")" class="btn btn-primary" title="Добавить новую тему" style="float:left; margin-left:10px;"><span class="glyphicon glyphicon-plus"></span> Отмена</a>
                 </div>
             </div>

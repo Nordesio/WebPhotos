@@ -184,10 +184,10 @@ namespace WebApp.Controllers
             User user = new User();
             if (password != pass_repeat)
             {
-                ViewBag.Message = "Password doesn't match";
+                ViewBag.Message = "Passwords does not match";
                 return EditUser();
             }
-            user.Id = auth_user.Id;
+            user = _userStorage.GetById(auth_user.Id);
             user.Password = password;
             _userStorage.Update(user);
             auth_user = _userStorage.GetById(user.Id);

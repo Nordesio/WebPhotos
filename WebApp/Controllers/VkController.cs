@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using X.PagedList;
-using X.PagedList.Mvc;
 namespace WebApp.Controllers
 {
     public class VkController : Controller
@@ -54,51 +53,9 @@ namespace WebApp.Controllers
             string imageSrc = $"data:image/jpeg;base64,{imageBase64}";
             return imageSrc;
         }
-
-        public async Task DownloadPicsFromVkUser(Vkuser vkuser)
+        public async Task<List<Request>> Parse(string last_name, string first_name, string token, string owner_id, int offset, Vkuser vkuser)
         {
-            
             List<Request> Requests = new List<Request>();
-            string first_name = "";
-            string last_name = "";
-            string https = vkuser.Url;
-            string id_stroka = https.Remove(0, 15);
-            string token = "vk1.a.j7qTt6XmHpN0toO7XpLuNC4dJ2_xk1PYZNMcVlW2_Nse0FnFfTjpkZS7fKhTnR_tTa90qYykgeEKm9HtOfEY4wg__p-Iy63ailP2r1OXZv-tTsHxB44crQPOQnzHodfkj5lRXl8QC20lpyESNNSD676yuVCab18W9-EsSenOcXH4-gf_j5vUCeR6SDSyh99xQSeFwR-6Uue9E01wTihbUw";
-            int offset = 0;
-            string getUserId = string.Format("https://api.vk.com/method/users.get?access_token={0}&user_ids={1}&v=5.131", token, id_stroka);
-            string owner_id = "";
-            var parsed123 = JsonConvert.DeserializeObject(new WebClient().DownloadString(getUserId));
-            var JsonObject2 = JToken.Parse(parsed123.ToString());
-            Console.WriteLine(parsed123.ToString());
-
-            var ids = JsonObject2.SelectTokens("response..id")
-                 .Select(v => (string)v)
-                 .ToList();
-            foreach (var ur in ids)
-            {
-                owner_id = ur;
-                Console.WriteLine(owner_id);
-            }
-            var names = JsonObject2.SelectTokens("response..first_name")
-                .Select(v => (string)v)
-                .ToList();
-            foreach (var ur in names)
-            {
-                first_name = ur;
-
-                Console.WriteLine(first_name);
-            }
-            var families = JsonObject2.SelectTokens("response..last_name")
-                .Select(v => (string)v)
-                .ToList();
-            foreach (var ur in families)
-            {
-                last_name = ur;
-
-                Console.WriteLine(last_name);
-            }
-
-
             bool toomuch = false;
             string text = "";
             List<string> urls = new List<string>();
@@ -256,7 +213,7 @@ namespace WebApp.Controllers
                     {
                         request.Date = null;
                     }
-                    
+
                     request.Text = texts;
                     request.ImageByte = DownloadImageToByteArray(u);
                     request.Url = ByteToString(request.ImageByte);
@@ -267,14 +224,65 @@ namespace WebApp.Controllers
                 }
 
             }
-           
             Console.WriteLine("Скачано {0} фотографий у id{1}", Requests.Count, owner_id);
-            _requestStorage.AddFullList(Requests);
+            return Requests;
+        }
+        public async Task DownloadPicsFromVkUser(Vkuser vkuser)
+        {
+            
+            
+            string first_name = "";
+            string last_name = "";
+            string https = vkuser.Url;
+            string id_stroka = https.Remove(0, 15);
+            string token = "vk1.a.7lcOooaNrdrAT48SYNZ7FeT2Gk7eYhBlDsKs4rxPDqake3wYCnEixEvvX93AaFcTjBYDQbjtMCIuKBjEqmPl2ZFv_T3rAgXhGR9gzL1o2swEinZgSIkaloG5svPtWkGO1mq7vV_sot23KkAb7YromMkiNhke6sCIDpRyXDMKp_JT3-BpaEy8VvYopcnJl7K4jKYqNHlmsJtu5w9e4Ql4ug";
+            int offset = 0;
+            string getUserId = string.Format("https://api.vk.com/method/users.get?access_token={0}&user_ids={1}&v=5.131", token, id_stroka);
+            string owner_id = "";
+            var parsed123 = JsonConvert.DeserializeObject(new WebClient().DownloadString(getUserId));
+            var JsonObject2 = JToken.Parse(parsed123.ToString());
+            Console.WriteLine(parsed123.ToString());
+
+            var ids = JsonObject2.SelectTokens("response..id")
+                 .Select(v => (string)v)
+                 .ToList();
+            foreach (var ur in ids)
+            {
+                owner_id = ur;
+                Console.WriteLine(owner_id);
+            }
+            var names = JsonObject2.SelectTokens("response..first_name")
+                .Select(v => (string)v)
+                .ToList();
+            foreach (var ur in names)
+            {
+                first_name = ur;
+
+                Console.WriteLine(first_name);
+            }
+            var families = JsonObject2.SelectTokens("response..last_name")
+                .Select(v => (string)v)
+                .ToList();
+            foreach (var ur in families)
+            {
+                last_name = ur;
+
+                Console.WriteLine(last_name);
+            }
+
+
+
+
+            await AddToDb(vkuser ,await Parse(last_name, first_name, token, owner_id, offset, vkuser));
+            
+        }
+
+        public async Task AddToDb(Vkuser vkuser, List<Request> requests)
+        {
+            _requestStorage.AddFullList(requests);
             vkuser.Status = "completed";
             _vkuserStorage.Update(vkuser);
         }
-
-
 
 
         // GET: VkController
@@ -299,15 +307,16 @@ namespace WebApp.Controllers
         public ActionResult VkResult(int vk_id, int? id = 1)
         {
             var images = _requestStorage.GetByVkId(vk_id);
-            List<string> imagesList = new List<string>();
+            List<Request> imagesList = new List<Request>();
             foreach(var i in images)
             {
                 if(!i.Url.Equals("null"))
-                imagesList.Add(i.Url);
+                imagesList.Add(i);
             }
             int pageNumber = (id ?? 1);
             ViewBag.Images = imagesList;
-            return View("Images", imagesList.ToPagedList(pageNumber, 30));
+            ViewBag.Id = vk_id;
+            return View(imagesList.ToPagedList(pageNumber, 30));
         }
        [HttpGet]
        public IActionResult AddVkUser()
@@ -333,9 +342,9 @@ namespace WebApp.Controllers
             {
                 Console.WriteLine(ex);
             }
-            
-            await DownloadPicsFromVkUser(vkuser);
-            //new Thread(() => { DownloadPicsFromVkUser; })
+
+            Task.Run(async () => { await DownloadPicsFromVkUser(vkuser); });
+
             return Redirect(nameof(Index));
         }
         [HttpGet]
@@ -350,14 +359,44 @@ namespace WebApp.Controllers
             _vkuserStorage.Delete(vk_id);
             return Redirect(nameof(Index));
         }
-    //    VkApi vkApi = new VkApi();
-    //    vkApi.Authorize(new VkNet.Model.ApiAuthParams
-    //        {
-    //            ApplicationId = 7087011,
-    //            Login = "email",
-    //            Password = "pass",
-    //            Settings = VkNet.Enums.Filters.Settings.All
-    //});
-    //        string token = vkApi.Token;
-}
+        [HttpGet]
+        public ActionResult EditVkUser(int vk_id)
+        {
+            Vkuser vkuser = new Vkuser();
+            vkuser = _vkuserStorage.GetById(vk_id);
+            return View(vkuser);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditVkUser(Vkuser vkuser)
+        {
+            var vkuserold = _vkuserStorage.GetById(vkuser.Id);
+            if(vkuserold.Url == vkuser.Url)
+            {
+                _vkuserStorage.Update(vkuser);
+            }
+            else
+            {
+                _requestStorage.DeleteByVkUser(vkuser);
+                vkuser.Status = "in_progress";
+                try
+                {
+                    _vkuserStorage.Update(vkuser);
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                Task.Run(async () => { await DownloadPicsFromVkUser(vkuser); });
+            }
+            return Redirect(nameof(Index));
+        }
+        //    VkApi vkApi = new VkApi();
+        //    vkApi.Authorize(new VkNet.Model.ApiAuthParams
+        //        {
+        //            ApplicationId = 7087011,
+        //            Login = "email",
+        //            Password = "pass",
+        //            Settings = VkNet.Enums.Filters.Settings.All
+        //});
+        //        string token = vkApi.Token;
+    }
 }
