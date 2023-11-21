@@ -11,7 +11,7 @@ public partial class User
 
     public string? Email { get; set; }
 
-    public bool? EmailConfirmed { get; set; }
+    public bool EmailConfirmed { get; set; }
 
     public string Password { get; set; } = null!;
 
