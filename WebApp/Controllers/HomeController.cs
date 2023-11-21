@@ -14,7 +14,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using BCrypt;
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
@@ -30,7 +30,22 @@ namespace WebApp.Controllers
         {
             _userStorage = userStorage;       
         }
-    
+        public string HashPassword(string password)
+        {
+            // Генерация соли для уникальности хеша
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12); // 12 - количество раундов хеширования
+
+            // Хеширование пароля с использованием соли
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
+
+            return hashedPassword;
+        }
+
+        public bool VerifyPassword(string password, string hashedPassword)
+        {
+            // Проверка соответствия хешированного пароля и введенного пароля
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+        }
         public IActionResult Index()
         {
             //if (hashPasswordmd5(pass).Equals(_userStorage.GetById(zero_patient).PasswordHash))
@@ -59,11 +74,15 @@ namespace WebApp.Controllers
             {
                 User user = new User();
                 user.Email = Email;
-                user.Password = Password;
-                auth_user = _userStorage.GetByEmailAndPass(user);
+                auth_user = _userStorage.GetByEmail(user);
                 if(auth_user == null)
                 {
-                    ViewBag.Message = "User doesn't exist!";
+                    ViewBag.Message = "User does not exist!";
+                    return Index();
+                }
+                if(!VerifyPassword(Password, _userStorage.GetByEmail(user).Password))
+                {
+                    ViewBag.Message = "Password is not correct!";
                     return Index();
                     //ModelState.AddModelError("", "Имя и электронный адрес не должны совпадать.");
                     //throw new Exception("Такого пользователя не существует");
@@ -107,7 +126,7 @@ namespace WebApp.Controllers
                 Random rnd = new Random();
                 User user = new User();
                 user.Name = name;
-                user.Password = password;
+                user.Password = HashPassword(password);
                 user.Role = "user";
                 if (IsValid(email))
                 {
@@ -188,7 +207,7 @@ namespace WebApp.Controllers
                 return EditUser();
             }
             user = _userStorage.GetById(auth_user.Id);
-            user.Password = password;
+            user.Password = HashPassword(password);
             _userStorage.Update(user);
             auth_user = _userStorage.GetById(user.Id);
             return RedirectToAction(nameof(Info));
