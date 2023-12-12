@@ -25,27 +25,16 @@ namespace WebApp.Controllers
         private static int code_ver;
         public static string role;
         public static int logged = 0;
+        private readonly IPasswordHashService _passwordHashService;
+        private readonly IAuthenticationService _authenticationService;
 
-        public HomeController(IUserStorage userStorage)
+        public HomeController(IUserStorage userStorage, IPasswordHashService passwordHashService, IAuthenticationService authenticationService)
         {
+            _authenticationService = authenticationService;
+            _passwordHashService = passwordHashService;
             _userStorage = userStorage;       
         }
-        public string HashPassword(string password)
-        {
-            // Генерация соли для уникальности хеша
-            string salt = BCrypt.Net.BCrypt.GenerateSalt(12); // 12 - количество раундов хеширования
-
-            // Хеширование пароля с использованием соли
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
-
-            return hashedPassword;
-        }
-
-        public bool VerifyPassword(string password, string hashedPassword)
-        {
-            // Проверка соответствия хешированного пароля и введенного пароля
-            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-        }
+    
         public IActionResult Index()
         {
             //if (hashPasswordmd5(pass).Equals(_userStorage.GetById(zero_patient).PasswordHash))
@@ -78,25 +67,25 @@ namespace WebApp.Controllers
                 if(auth_user == null)
                 {
                     ViewBag.Message = "User does not exist!";
-                    return Index();
+                    return View();
                 }
-                if(!VerifyPassword(Password, _userStorage.GetByEmail(user).Password))
+                if(!_passwordHashService.VerifyPassword(Password, _userStorage.GetByEmail(user).Password))
                 {
                     ViewBag.Message = "Password is not correct!";
-                    return Index();
+                    return View();
                     //ModelState.AddModelError("", "Имя и электронный адрес не должны совпадать.");
                     //throw new Exception("Такого пользователя не существует");
 
                 }
                 role = auth_user.Role;
                 logged = 1;
-                await Authenticate(auth_user); // аутентификация
+                await _authenticationService.Authenticate(auth_user); // аутентификация    
                 return RedirectToAction(nameof(Info));
             }
             else
             {
                 ViewBag.Message = "Input password/login";
-                return Index();
+                return View();
                 //throw new Exception("Введите логин/пароль");
             }
             
@@ -126,7 +115,7 @@ namespace WebApp.Controllers
                 Random rnd = new Random();
                 User user = new User();
                 user.Name = name;
-                user.Password = HashPassword(password);
+                user.Password = _passwordHashService.HashPassword(password);
                 user.Role = "user";
                 if (IsValid(email))
                 {
@@ -153,7 +142,7 @@ namespace WebApp.Controllers
 
                 }
                 pre_registration_user = user;
-                Authenticate(pre_registration_user);
+                _authenticationService.Authenticate(pre_registration_user);
                 code_ver = rnd.Next(100000);
                 var mail = DB.SendMessage.CreateMail(pre_registration_user.Email, code_ver);
                 DB.SendMessage.SendMail(mail);
@@ -207,7 +196,7 @@ namespace WebApp.Controllers
                 return EditUser();
             }
             user = _userStorage.GetById(auth_user.Id);
-            user.Password = HashPassword(password);
+            user.Password = _passwordHashService.HashPassword(password);
             _userStorage.Update(user);
             auth_user = _userStorage.GetById(user.Id);
             return RedirectToAction(nameof(Info));
@@ -252,18 +241,6 @@ namespace WebApp.Controllers
         {
             return RedirectToAction(nameof(Info));
         }
-        private async Task Authenticate(User user)
-        {
-            // создаем один claim
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
-            };
-            var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
-            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-            await HttpContext.SignInAsync(claimsPrincipal);
-         
-        }
+   
     } 
 }

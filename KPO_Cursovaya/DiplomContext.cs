@@ -56,7 +56,8 @@ public partial class DiplomContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("Users_pkey");
-
+            entity.Property(e => e.Id)
+              .ValueGeneratedOnAdd(); 
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.EmailConfirmed).HasColumnName("Email_confirmed");
 

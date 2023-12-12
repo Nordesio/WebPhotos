@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPO_Cursovaya", "KPO_Cursovaya\KPO_Cursovaya.csproj", "{6C2CCC99-5E82-4193-B016-7DF93B92BD0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KPO_Cursovaya", "KPO_Cursovaya\KPO_Cursovaya.csproj", "{6C2CCC99-5E82-4193-B016-7DF93B92BD0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{E6E238AB-DB77-4691-ABE1-30D1DDBC3138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{E6E238AB-DB77-4691-ABE1-30D1DDBC3138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPO_Cursovaya.Tests", "KPO_Cursovaya.Tests\KPO_Cursovaya.Tests.csproj", "{D72CCF41-B919-4E64-8F98-71BFCB071B71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E6E238AB-DB77-4691-ABE1-30D1DDBC3138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6E238AB-DB77-4691-ABE1-30D1DDBC3138}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6E238AB-DB77-4691-ABE1-30D1DDBC3138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

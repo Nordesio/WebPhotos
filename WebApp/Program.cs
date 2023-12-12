@@ -10,6 +10,7 @@ using KPO_Cursovaya.Implements;
 using KPO_Cursovaya.StorageInterfaces;
 using KPO_Cursovaya.Models;
 using KPO_Cursovaya;
+using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUserStorage, UserStorage>();
 builder.Services.AddTransient<IRoleStorage, RoleStorage>();
-builder.Services.AddTransient<IVkuserStorage, VkuserStorage > ();
+builder.Services.AddTransient<IVkuserStorage, VkuserStorage>();
 builder.Services.AddTransient<IRequestStorage, RequestStorage>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<IPasswordHashService, PasswordHashService>();
+builder.Services.AddTransient<IAuthenticationService, WebApp.AuthenticationService>();
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
