@@ -195,11 +195,21 @@ namespace WebApp.Controllers
                 ViewBag.Message = "Passwords does not match";
                 return EditUser();
             }
-            user = _userStorage.GetById(auth_user.Id);
-            user.Password = _passwordHashService.HashPassword(password);
-            _userStorage.Update(user);
-            auth_user = _userStorage.GetById(user.Id);
-            return RedirectToAction(nameof(Info));
+            if (auth_user != null) // Проверка на null перед использованием auth_user
+            {
+                user = _userStorage.GetById(auth_user.Id);
+                user.Password = _passwordHashService.HashPassword(password);
+                _userStorage.Update(user);
+                auth_user = _userStorage.GetById(user.Id);
+                return RedirectToAction(nameof(Info));
+            }
+            else
+            {
+                // Добавьте обработку, если auth_user равен null
+                ViewBag.Message = "User not authenticated";
+                return View(); // или возвращайте другое действие, в зависимости от логики приложения
+            }
+         
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
