@@ -150,7 +150,7 @@ namespace KPO_Cursovaya.Tests
             Assert.NotNull(result);
             Assert.Equal("Info", result.ActionName);
         }
-
+        // Тестирование регистрации
         [Fact]
         public async Task Register_ValidInput_RedirectsToDoubleAuth()
         {
