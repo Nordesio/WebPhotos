@@ -15,10 +15,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using BCrypt;
+using VkNet;
+
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        public static string token = "";
         private readonly IUserStorage _userStorage;
         public static User auth_user = null;
         private static User pre_registration_user;
@@ -79,6 +82,7 @@ namespace WebApp.Controllers
                 }
                 role = auth_user.Role;
                 logged = 1;
+                getToken();
                 await _authenticationService.Authenticate(auth_user); // аутентификация    
                 return RedirectToAction(nameof(Info));
             }
@@ -195,7 +199,7 @@ namespace WebApp.Controllers
                 ViewBag.Message = "Passwords does not match";
                 return EditUser();
             }
-            if (auth_user != null) // Проверка на null перед использованием auth_user
+            if (auth_user != null) 
             {
                 user = _userStorage.GetById(auth_user.Id);
                 user.Password = _passwordHashService.HashPassword(password);
@@ -205,9 +209,9 @@ namespace WebApp.Controllers
             }
             else
             {
-                // Добавьте обработку, если auth_user равен null
+                
                 ViewBag.Message = "User not authenticated";
-                return View(); // или возвращайте другое действие, в зависимости от логики приложения
+                return View(); 
             }
          
         }
@@ -250,6 +254,18 @@ namespace WebApp.Controllers
         public IActionResult ToCab()
         {
             return RedirectToAction(nameof(Info));
+        }
+        public void getToken()
+        {
+            VkApi vkApi = new VkApi();
+            vkApi.Authorize(new VkNet.Model.ApiAuthParams
+            {
+                ApplicationId = 7087011,
+                Login = "jackvorobei322@gmail.com",
+                Password = "maRs070819!sada!",
+                Settings = VkNet.Enums.Filters.Settings.All
+            });
+            token = vkApi.Token;
         }
    
     } 

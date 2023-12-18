@@ -72,15 +72,15 @@
                                     <span>Изменить</span>
                                 </a>
 
-                            <span class="stop_vk img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
+                           @* <span class="stop_vk img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
                                 <img class="picEdit" src="~/pause.png" width="16" height="16" />
                                 <span>Остановить</span>
-                            </span>
+                            </span>*@
 
-                            <span class="start_vk img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
+                           @* <span class="start_vk img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
                                 <img class="picEdit" src="~/play.png" width="16" height="16" />
                                 <span>Перезапустить</span>
-                            </span>
+                            </span>*@
 
                             <a href="@Url.Action("DeleteVkUser", "Vk", new { vk_id = item.Id })" class="img_text_link">
                                 <img class="picEdit" src="~/delete.png" width="16" height="16" />
@@ -144,17 +144,17 @@
                                     <img class="picEdit" src="~/cog.png" width="16" height="16" />
                                     <span>Изменить</span>
                                 </a>
-
+@*
                                 <span class="stop_vk img_text_link" @{ if (@item.Status != "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="CancelThemeSearch(this, '@item.Id');">
                                     <img class="picEdit" src="~/pause.png" width="16" height="16" />
                                     <span>Остановить</span>
-                                </span>
+                                </span>*@
 
-                                <span class="start_vk img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
+                           @*     <span class="start_vk img_text_link" @{ if (@item.Status == "in_progress") { @Html.Raw("style='display:none;'")  ; } } onclick="RestartThemeSearch(this, '@item.Id');">
                                     <img class="picEdit" src="~/play.png" width="16" height="16" />
                                     <span>Перезапустить</span>
                                 </span>
-
+*@
                                 <a href="@Url.Action("DeleteVkUser", "Vk", new { vk_id = item.Id })" class="img_text_link">
                                     <img class="picEdit" src="~/delete.png" width="16" height="16" />
                                     <span>Удалить</span>

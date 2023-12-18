@@ -235,9 +235,8 @@ namespace WebApp.Controllers
             string last_name = "";
             string https = vkuser.Url;
             string id_stroka = https.Remove(0, 15);
-            string token = "vk1.a.7lcOooaNrdrAT48SYNZ7FeT2Gk7eYhBlDsKs4rxPDqake3wYCnEixEvvX93AaFcTjBYDQbjtMCIuKBjEqmPl2ZFv_T3rAgXhGR9gzL1o2swEinZgSIkaloG5svPtWkGO1mq7vV_sot23KkAb7YromMkiNhke6sCIDpRyXDMKp_JT3-BpaEy8VvYopcnJl7K4jKYqNHlmsJtu5w9e4Ql4ug";
             int offset = 0;
-            string getUserId = string.Format("https://api.vk.com/method/users.get?access_token={0}&user_ids={1}&v=5.131", token, id_stroka);
+            string getUserId = string.Format("https://api.vk.com/method/users.get?access_token={0}&user_ids={1}&v=5.131", HomeController.token, id_stroka);
             string owner_id = "";
             var parsed123 = JsonConvert.DeserializeObject(new WebClient().DownloadString(getUserId));
             var JsonObject2 = JToken.Parse(parsed123.ToString());
@@ -273,7 +272,7 @@ namespace WebApp.Controllers
 
 
 
-            await AddToDb(vkuser ,await Parse(last_name, first_name, token, owner_id, offset, vkuser));
+            await AddToDb(vkuser ,await Parse(last_name, first_name, HomeController.token, owner_id, offset, vkuser));
             
         }
 
@@ -307,6 +306,7 @@ namespace WebApp.Controllers
         public ActionResult VkResult(int vk_id, int? id = 1)
         {
             var images = _requestStorage.GetByVkId(vk_id);
+           
             List<Request> imagesList = new List<Request>();
             foreach(var i in images)
             {
@@ -316,6 +316,7 @@ namespace WebApp.Controllers
             int pageNumber = (id ?? 1);
             ViewBag.Images = imagesList;
             ViewBag.Id = vk_id;
+            ViewBag.Name = imagesList[0].Author;
             return View(imagesList.ToPagedList(pageNumber, 30));
         }
        [HttpGet]
@@ -389,14 +390,5 @@ namespace WebApp.Controllers
             }
             return Redirect(nameof(Index));
         }
-        //    VkApi vkApi = new VkApi();
-        //    vkApi.Authorize(new VkNet.Model.ApiAuthParams
-        //        {
-        //            ApplicationId = 7087011,
-        //            Login = "email",
-        //            Password = "pass",
-        //            Settings = VkNet.Enums.Filters.Settings.All
-        //});
-        //        string token = vkApi.Token;
     }
 }

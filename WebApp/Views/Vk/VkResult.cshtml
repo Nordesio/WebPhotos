@@ -8,18 +8,35 @@
 <head>
     <link rel="stylesheet" href="~/css/PagedList.css">
 </head>
+<h1>Фотографии пользователя: @ViewBag.Name</h1>
+<style>
+    .image-container {
+        width: 100%; /* Фотографии будут занимать всю ширину */
+        border: 2px solid #ccc; /* Рамка изображения */
+        padding: 5px; /* Отступ внутри рамки */
+        margin: 5px; /* Отступ вокруг каждого изображения */
+        box-sizing: border-box; /* Учитываем padding и border при определении ширины */
+        display: flex; /* Располагаем фотографии в ряд */
+        flex-wrap: wrap; /* Переносим на следующую строку, если места не хватает */
+        justify-content: space-around; /* Выравниваем фотографии по ширине */
+    }
 
+    .image-container img {
+        width: calc(25% - 10px); /* Размер каждой фотографии (вычитаем отступы) */
+        height: auto; /* Автоматический расчет высоты для поддержки соотношения сторон */
+        display: block; /* Для правильного отображения изображения внутри контейнера */
+        border: 1px solid #000; /* Черная рамка вокруг изображения */
+        margin: 5px; /* Отступ вокруг каждой фотографии */
+    }
+</style>
 
+<div class="image-container">
+    @foreach(var image in Model){
+        <img src="@image.Url" alt="Image">
+    }
+</div>
 
-@foreach(var image in Model){
-    <img src="@image.Url" style="max-width: 30%; max-height: 30%;" alt="Image">
-}
-<div class = "themes">
-
-
+<div class="themes">
     Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
- 
     @Html.PagedListPager(Model, page => Url.Action("VkResult", new { vk_id = ViewBag.Id, id = page }))
-
-        
 </div>
