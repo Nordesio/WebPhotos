@@ -12,10 +12,10 @@ namespace DB
     {
         public static MailMessage CreateMail(string emailTo, int code)
         {
-            var from = new MailAddress("testovik402@gmail.com", "Терьер");
+            var from = new MailAddress("testovik402@gmail.com", "ВебФото");
             var to = new MailAddress(emailTo);
             var mail = new MailMessage(from, to);
-            mail.Subject = "Продолжите регистрацию в Терьер";
+            mail.Subject = "Продолжите регистрацию в ВебФото";
             mail.Body = "Для продолжения регистрации введите следующий верификационный код: \n" + code;
             mail.IsBodyHtml = true;
             return mail;

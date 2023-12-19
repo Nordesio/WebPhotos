@@ -66,8 +66,8 @@ namespace WebApp.Controllers
             {
                 User user = new User();
                 user.Email = Email;
-                auth_user = _userStorage.GetByEmail(user);
-                if(auth_user == null)
+                User test_user = _userStorage.GetByEmail(user);
+                if(test_user == null)
                 {
                     ViewBag.Message = "User does not exist!";
                     return View();
@@ -80,6 +80,7 @@ namespace WebApp.Controllers
                     //throw new Exception("Такого пользователя не существует");
 
                 }
+                auth_user = test_user;
                 role = auth_user.Role;
                 logged = 1;
                 getToken();

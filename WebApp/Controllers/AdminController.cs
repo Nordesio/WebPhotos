@@ -17,11 +17,12 @@ namespace WebApp.Controllers
     {
         private readonly IUserStorage _userStorage;
         public static User auth_user_admin;
-        
-    
-        public AdminController(IUserStorage userStorage)
+        private readonly IPasswordHashService _passwordHashService;
+
+        public AdminController(IUserStorage userStorage, IPasswordHashService passwordHashService)
         {
             _userStorage = userStorage;
+            _passwordHashService = passwordHashService;
         }
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -93,6 +94,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> UserEdit(User user)
         {
+            user.Password = _passwordHashService.HashPassword(user.Password);
             _userStorage.Update(user);
             return RedirectToAction(nameof(Index));
         }

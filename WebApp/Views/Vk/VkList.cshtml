@@ -50,6 +50,7 @@
                                 <a href="@Url.Action("VkResult", "Vk", new { vk_id = item.Id })">
                                     @item.Name
                                 </a>
+                                
                             </h4>
                         </td>
                        </tr>
@@ -61,6 +62,7 @@
                             <h5 class="dataContText" style="margin-top:0px">
                                 <blockquot>Обновлено:</blockquot>
                                 <blockquot class="dataContText" style="color:black">@item.Date.Value</blockquot>
+                                <blockquot class="dataContText" style="color:black">Создано пользователем с id: @item.UserId</blockquot>
                                 @*<blockquot style="margin:0 0 0 30px">Получать уведомления в телеграм:</blockquot>*@
                                
                             </h5>
