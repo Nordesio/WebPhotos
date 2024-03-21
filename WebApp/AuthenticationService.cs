@@ -1,4 +1,4 @@
-﻿using KPO_Cursovaya.Models;
+﻿using DbData.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 namespace WebApp;

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
-using KPO_Cursovaya.StorageInterfaces;
-using KPO_Cursovaya.Models;
-using KPO_Cursovaya.Implements;
+using DbData.StorageInterfaces;
+using DbData.Models;
+using DbData.Implements;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
@@ -149,8 +149,8 @@ namespace WebApp.Controllers
                 pre_registration_user = user;
                 _authenticationService.Authenticate(pre_registration_user);
                 code_ver = rnd.Next(100000);
-                var mail = DB.SendMessage.CreateMail(pre_registration_user.Email, code_ver);
-                DB.SendMessage.SendMail(mail);
+                var mail = DbData.SendMessage.CreateMail(pre_registration_user.Email, code_ver);
+                DbData.SendMessage.SendMail(mail);
                 //_userStorage.InsertUser(user);
                 return RedirectToAction(nameof(DoubleAuth));
             }

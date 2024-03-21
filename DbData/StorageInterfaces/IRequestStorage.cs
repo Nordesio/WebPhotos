@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KPO_Cursovaya.Models;
-namespace KPO_Cursovaya.StorageInterfaces
+using DbData.Models;
+namespace DbData.StorageInterfaces
 {
     public interface IRequestStorage
     {

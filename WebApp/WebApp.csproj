@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KPO_Cursovaya\KPO_Cursovaya.csproj" />
+    <ProjectReference Include="..\DbData\DbData.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
-using KPO_Cursovaya.Models;
-using KPO_Cursovaya.Implements;
-using KPO_Cursovaya.StorageInterfaces;
+using DbData.Models;
+using DbData.Implements;
+using DbData.StorageInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
 using System.Text;

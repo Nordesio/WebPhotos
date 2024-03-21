@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KPO_Cursovaya.Models;
-using KPO_Cursovaya.StorageInterfaces;
+using DbData.Models;
+using DbData.StorageInterfaces;
 
-namespace KPO_Cursovaya.Implements
+namespace DbData.Implements
 {
     public class RequestStorage : IRequestStorage
     {

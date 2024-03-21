@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KPO_Cursovaya.Models;
-using KPO_Cursovaya.StorageInterfaces;
-namespace KPO_Cursovaya.Implements
+using DbData.Models;
+using DbData.StorageInterfaces;
+namespace DbData.Implements
 {
     public class RoleStorage : IRoleStorage
     {

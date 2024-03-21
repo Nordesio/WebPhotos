@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace KPO_Cursovaya.Models;
+namespace DbData.Models;
 
 public partial class Role
 {

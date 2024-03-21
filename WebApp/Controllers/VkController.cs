@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
-using KPO_Cursovaya.StorageInterfaces;
-using KPO_Cursovaya.Models;
-using KPO_Cursovaya.Implements;
+using DbData.StorageInterfaces;
+using DbData.Models;
+using DbData.Implements;
 using System.Globalization;
 using System.Security.Cryptography;
 using Newtonsoft.Json;

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KPO_Cursovaya.Models;
+using DbData.Models;
 using Microsoft.EntityFrameworkCore;
-using KPO_Cursovaya.StorageInterfaces;
-namespace KPO_Cursovaya.Implements
+using DbData.StorageInterfaces;
+namespace DbData.Implements
 {
     public class UserStorage : IUserStorage
     {

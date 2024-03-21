@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using KPO_Cursovaya.Implements;
-using KPO_Cursovaya.StorageInterfaces;
-using KPO_Cursovaya.Models;
-using KPO_Cursovaya;
+using DbData.Implements;
+using DbData.StorageInterfaces;
+using DbData.Models;
+using DbData;
 using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);

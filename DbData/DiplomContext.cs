@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using KPO_Cursovaya.Models;
-namespace KPO_Cursovaya;
+using DbData.Models;
+namespace DbData;
 
 public partial class DiplomContext : DbContext
 {

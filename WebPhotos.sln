@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KPO_Cursovaya", "KPO_Cursovaya\KPO_Cursovaya.csproj", "{6C2CCC99-5E82-4193-B016-7DF93B92BD0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbData", "DbData\DbData.csproj", "{6C2CCC99-5E82-4193-B016-7DF93B92BD0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{E6E238AB-DB77-4691-ABE1-30D1DDBC3138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPO_Cursovaya.Tests", "KPO_Cursovaya.Tests\KPO_Cursovaya.Tests.csproj", "{D72CCF41-B919-4E64-8F98-71BFCB071B71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebPhotos.Tests", "WebPhotos.Tests\WebPhotos.Tests.csproj", "{D72CCF41-B919-4E64-8F98-71BFCB071B71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
