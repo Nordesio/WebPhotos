@@ -4398,7 +4398,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
     line-height: 20px;
 }
 
-    .navbar-brand:hover,
+    .navbar-brand:hover {
+        outline: 1px solid white;
+    }
     .navbar-brand:focus {
         text-decoration: none;
     }
@@ -4716,6 +4718,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
     .navbar-default .navbar-link:hover {
         color: #333333;
+        outline: 1px solid white;
     }
 
 .navbar-inverse {

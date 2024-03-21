@@ -283,6 +283,17 @@ namespace WebApp.Controllers
             _vkuserStorage.Update(vkuser);
         }
 
+        private bool IsUserInRules(int vk_id)
+        {
+            bool user = false;
+            var vkuser_test = _vkuserStorage.GetById(vk_id);
+            if (HomeController.auth_user.Id != vkuser_test.UserId && HomeController.auth_user.Role != "admin")
+            {
+
+            }
+            else { user = true; }
+            return user;
+        }
 
         // GET: VkController
         public ActionResult Index()
@@ -302,11 +313,15 @@ namespace WebApp.Controllers
                 return View(_vkuserStorage.GetFullList());
             }
         }
+        [Authorize(Roles = "user, admin")]
         [HttpGet]
         public ActionResult VkResult(int vk_id, int? id = 1)
         {
+            if (!IsUserInRules(vk_id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var images = _requestStorage.GetByVkId(vk_id);
-           
             List<Request> imagesList = new List<Request>();
             foreach(var i in images)
             {
@@ -319,11 +334,13 @@ namespace WebApp.Controllers
             ViewBag.Name = imagesList[0].Author;
             return View(imagesList.ToPagedList(pageNumber, 30));
         }
-       [HttpGet]
+        [Authorize(Roles = "user, admin")]
+        [HttpGet]
        public IActionResult AddVkUser()
         {
             return View();
         }
+        [Authorize(Roles = "user, admin")]
         [HttpPost]
         public async Task<IActionResult> AddVkUser(string Name, string Url)
         {
@@ -348,25 +365,40 @@ namespace WebApp.Controllers
 
             return Redirect(nameof(Index));
         }
+        [Authorize(Roles = "user, admin")]
         [HttpGet]
         public ActionResult DeleteVkUser(int vk_id)
         {
+            if (!IsUserInRules(vk_id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             Vkuser vkuser = new Vkuser();
             vkuser = _vkuserStorage.GetById(vk_id);
             return View(vkuser);
         }
         public ActionResult DeleteConfirmed(int vk_id)
         {
+            if (!IsUserInRules(vk_id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             _vkuserStorage.Delete(vk_id);
             return Redirect(nameof(Index));
         }
+        [Authorize(Roles = "user, admin")]
         [HttpGet]
         public ActionResult EditVkUser(int vk_id)
         {
+            if (!IsUserInRules(vk_id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
             Vkuser vkuser = new Vkuser();
             vkuser = _vkuserStorage.GetById(vk_id);
             return View(vkuser);
         }
+        [Authorize(Roles = "user, admin")]
         [HttpPost]
         public async Task<IActionResult> EditVkUser(Vkuser vkuser)
         {

@@ -8,7 +8,7 @@
             // Генерация соли для уникальности хеша
             string salt = BCrypt.Net.BCrypt.GenerateSalt(12); // 12 - количество раундов хеширования
 
-            // Хеширование пароля с использованием соли
+            
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
 
             return hashedPassword;

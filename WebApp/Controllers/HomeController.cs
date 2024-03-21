@@ -83,7 +83,7 @@ namespace WebApp.Controllers
                 auth_user = test_user;
                 role = auth_user.Role;
                 logged = 1;
-                getToken();
+                //getToken();
                 await _authenticationService.Authenticate(auth_user); // аутентификация    
                 return RedirectToAction(nameof(Info));
             }
