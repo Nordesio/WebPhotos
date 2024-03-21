@@ -21,7 +21,7 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public static string token = "";
+        public static string token = "vk1.a.zAMJkM_INfiEG_0JkSWqwp4rjfGTA-ffeL8EmwnD3dlpUQXVJsPRKfjRc7xd4OIYZ2UdOBVLWAxc1HUM-lHfb8v5Iy1f1CDNMJSfQqClyTygDecuJEwtSKef_8PjfnjX-rhI4qbESK20oxiY7VihDfkDHr9bhi3Z5wkohI8eY-AH-MyI5tW9bMRVEut6bwAc54pD5h7NlEDXa04bopnQZQ";
         private readonly IUserStorage _userStorage;
         public static User auth_user = null;
         private static User pre_registration_user;
@@ -259,13 +259,21 @@ namespace WebApp.Controllers
         public void getToken()
         {
             VkApi vkApi = new VkApi();
-            vkApi.Authorize(new VkNet.Model.ApiAuthParams
+            try
             {
-                ApplicationId = 7087011,
-                Login = "jackvorobei322@gmail.com",
-                Password = "maRs070819!sada!",
-                Settings = VkNet.Enums.Filters.Settings.All
-            });
+                vkApi.Authorize(new VkNet.Model.ApiAuthParams
+                {
+                    ApplicationId = 7087011,
+                    Login = "jackvorobei322@gmail.com",
+                    Password = "maRs070819!sada!",
+                    Settings = VkNet.Enums.Filters.Settings.All
+                });
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+          
             token = vkApi.Token;
         }
    

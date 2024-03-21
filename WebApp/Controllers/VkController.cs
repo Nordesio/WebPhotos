@@ -323,6 +323,7 @@ namespace WebApp.Controllers
             }
             var images = _requestStorage.GetByVkId(vk_id);
             List<Request> imagesList = new List<Request>();
+            
             foreach(var i in images)
             {
                 if(!i.Url.Equals("null"))
@@ -331,6 +332,7 @@ namespace WebApp.Controllers
             int pageNumber = (id ?? 1);
             ViewBag.Images = imagesList;
             ViewBag.Id = vk_id;
+            if(imagesList.Count != 0)
             ViewBag.Name = imagesList[0].Author;
             return View(imagesList.ToPagedList(pageNumber, 30));
         }
