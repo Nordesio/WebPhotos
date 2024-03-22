@@ -189,7 +189,9 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult EditUser()
         {
-            return View(auth_user);
+            var new_user = auth_user;
+            new_user.Password = "";
+            return View(new_user);
         }
         [HttpPost]
         public IActionResult EditUser(string password, string pass_repeat)
