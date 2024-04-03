@@ -258,26 +258,6 @@ namespace WebApp.Controllers
         {
             return RedirectToAction(nameof(Info));
         }
-        public void getToken()
-        {
-            VkApi vkApi = new VkApi();
-            try
-            {
-                vkApi.Authorize(new VkNet.Model.ApiAuthParams
-                {
-                    ApplicationId = 7087011,
-                    Login = "jackvorobei322@gmail.com",
-                    Password = "maRs070819!sada!",
-                    Settings = VkNet.Enums.Filters.Settings.All
-                });
 
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-          
-            token = vkApi.Token;
-        }
-   
     } 
 }

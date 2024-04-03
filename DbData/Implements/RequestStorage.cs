@@ -46,6 +46,11 @@ namespace DbData.Implements
             using var db = new DiplomContext();
             return db.Requests.Where(c => c.VkuserId == id).ToList();
         }
+        public Request GetById(int id)
+        {
+            using var db = new DiplomContext();
+            return db.Requests.FirstOrDefault(c => c.Id == id);
+        }
         public void AddFullList(List<Request> req)
         {
             using var db = new DiplomContext();

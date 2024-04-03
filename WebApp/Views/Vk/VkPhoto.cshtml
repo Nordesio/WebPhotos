@@ -1,0 +1,39 @@
+﻿@model DbData.Models.Request
+
+@{
+    ViewBag.Title = "Детали фотографии";
+}
+
+
+
+<div>
+
+    <div style="float: left; width: 50%;">
+        <h1>Фотография</h1>
+        <img src="@Model.Url" alt="Image" style="max-width: 100%;">
+    </div>
+    <div style="float: right; width: 49%;">
+       
+        <!-- Здесь можете выводить текст, связанный с фотографией -->
+        <!-- Например, заголовок и описание -->
+        @if (!string.IsNullOrWhiteSpace(Model.Text))
+        {
+            <h1>Текст с фотографии</h1>
+            <h3>@Model.Text</h3>
+            @if (!string.IsNullOrWhiteSpace(Model.Text)) // здесь надо сделать тоже самое, но с сущностями
+            {
+                <h1>Выявленные сущности</h1>
+                <p>@Model.Text</p>
+            }
+            else
+            {
+                <h1>Сущности в тексте отсутствуют, либо их невозможно определить</h1>
+            }
+        }else{
+            <h1>Текст на фото отсутствует, либо фото плохого качества</h1>
+        }
+
+
+
+    </div>
+</div>

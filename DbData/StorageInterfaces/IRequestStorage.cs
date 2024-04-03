@@ -14,9 +14,9 @@ namespace DbData.StorageInterfaces
         List<Request> GetFullList();
 
         List<Request> GetByVkId(int id);
-
+        Request GetById(int id);
         void Delete(int id);
-
+        
         void Delete(Request request);
         void DeleteByVkUser(Vkuser vkuser);
 

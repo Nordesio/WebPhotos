@@ -323,18 +323,15 @@ namespace WebApp.Controllers
             }
             var images = _requestStorage.GetByVkId(vk_id);
             List<Request> imagesList = new List<Request>();
-            
-            foreach(var i in images)
-            {
-                if(!i.Url.Equals("null"))
-                imagesList.Add(i);
-            }
+
+            var filteredImages = images.Where(i => !i.Url.Equals("null")).ToList();
+
             int pageNumber = (id ?? 1);
-            ViewBag.Images = imagesList;
+
+            ViewBag.Images = filteredImages;
             ViewBag.Id = vk_id;
-            if(imagesList.Count != 0)
-            ViewBag.Name = imagesList[0].Author;
-            return View(imagesList.ToPagedList(pageNumber, 30));
+            ViewBag.Name = filteredImages.FirstOrDefault()?.Author; // Получаем имя автора первого изображения, если оно есть
+            return View(filteredImages.ToPagedList(pageNumber, 30));
         }
         [Authorize(Roles = "user, admin")]
         [HttpGet]
@@ -424,5 +421,21 @@ namespace WebApp.Controllers
             }
             return Redirect(nameof(Index));
         }
+        [Authorize(Roles = "user, admin")]
+        [HttpGet]
+        public ActionResult VkPhoto(int vk_id, int imageId)
+        {
+            // Загрузка данных о фотографии по imageId
+            var image = _requestStorage.GetById(imageId);
+            if (image == null)
+            {
+                return Redirect(nameof(Index));
+            }
+
+            return View(image);
+        }
+
+
+
     }
 }
