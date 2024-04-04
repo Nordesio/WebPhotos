@@ -25,6 +25,22 @@ namespace DbData.Implements
             CreateModel(request, element);
             db.SaveChanges();
         }
+        public void Update(IEnumerable<Request> requests)
+        {
+            using var db = new DiplomContext();
+
+            foreach (var request in requests)
+            {
+                var element = db.Requests.FirstOrDefault(rec => rec.Id == request.Id);
+                if (element == null)
+                {
+                    throw new Exception($"Элемент с Id {request.Id} не найден");
+                }
+                CreateModel(request, element);
+            }
+
+            db.SaveChanges();
+        }
         private Request CreateModel(Request model, Request request)
         {
             request.Date = model.Date;

@@ -4,36 +4,50 @@
     ViewBag.Title = "Детали фотографии";
 }
 
+<style>
+    .details-container {
+        display: flex;
+        padding: 10px;
+    }
 
+    .image-container,
+    .text-container {
+        flex: 1;
+        padding: 10px;
+    }
 
-<div>
+        .image-container img,
+        .text-container h3 {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+</style>
 
-    <div style="float: left; width: 50%;">
+<div class="details-container">
+    <div class="image-container">
         <h1>Фотография</h1>
         <img src="@Model.Url" alt="Image" style="max-width: 100%;">
     </div>
-    <div style="float: right; width: 49%;">
-       
-        <!-- Здесь можете выводить текст, связанный с фотографией -->
-        <!-- Например, заголовок и описание -->
+    <div class="text-container">
         @if (!string.IsNullOrWhiteSpace(Model.Text))
         {
             <h1>Текст с фотографии</h1>
             <h3>@Model.Text</h3>
-            @if (!string.IsNullOrWhiteSpace(Model.Text)) // здесь надо сделать тоже самое, но с сущностями
+            @if (!string.IsNullOrWhiteSpace(Model.Text))
             {
                 <h1>Выявленные сущности</h1>
-                <p>@Model.Text</p>
+                <h3>@Model.Text</h3>
             }
             else
             {
                 <h1>Сущности в тексте отсутствуют, либо их невозможно определить</h1>
             }
-        }else{
+        }
+        else
+        {
             <h1>Текст на фото отсутствует, либо фото плохого качества</h1>
         }
-
-
-
+       
     </div>
 </div>

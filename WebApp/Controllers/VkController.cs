@@ -136,7 +136,8 @@ namespace WebApp.Controllers
                 Console.WriteLine("Скачано: " + u);
                 request.Author = last_name + " " + first_name;
                 request.AuthorId = owner_id;
-                request.AuthorLink = "https://vk.com/" + owner_id;
+                // временно записываю ссылку на фото в эту переменную
+                request.AuthorLink = u;
                 Requests.Add(request);
             }
 
@@ -219,7 +220,8 @@ namespace WebApp.Controllers
                     request.Url = ByteToString(request.ImageByte);
                     request.Author = first_name + " " + last_name;
                     request.AuthorId = "id" + owner_id;
-                    request.AuthorLink = "https://vk.com/id" + owner_id;
+                    // временно записываю ссылку на фото в эту переменную
+                    request.AuthorLink = u;
                     Requests.Add(request);
                 }
 
@@ -281,6 +283,7 @@ namespace WebApp.Controllers
             _requestStorage.AddFullList(requests);
             vkuser.Status = "completed";
             _vkuserStorage.Update(vkuser);
+
         }
 
         private bool IsUserInRules(int vk_id)

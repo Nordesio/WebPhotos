@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebPhotos.Tests", "WebPhotos.Tests\WebPhotos.Tests.csproj", "{D72CCF41-B919-4E64-8F98-71BFCB071B71}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ocr", "Ocr", "{CCC89000-DBCA-40B8-BE7F-0666745EA267}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecBot", "RecBot\RecBot.csproj", "{B24B302B-F425-46EC-AFA5-D4CC8AE9FE8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D72CCF41-B919-4E64-8F98-71BFCB071B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B24B302B-F425-46EC-AFA5-D4CC8AE9FE8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24B302B-F425-46EC-AFA5-D4CC8AE9FE8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24B302B-F425-46EC-AFA5-D4CC8AE9FE8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24B302B-F425-46EC-AFA5-D4CC8AE9FE8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B24B302B-F425-46EC-AFA5-D4CC8AE9FE8A} = {CCC89000-DBCA-40B8-BE7F-0666745EA267}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86440212-1993-4A5F-8C30-2D806122D471}

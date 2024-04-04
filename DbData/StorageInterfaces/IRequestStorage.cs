@@ -11,6 +11,7 @@ namespace DbData.StorageInterfaces
         void Insert(Request request);
 
         void Update(Request request);
+        void Update(IEnumerable<Request> requests);
         List<Request> GetFullList();
 
         List<Request> GetByVkId(int id);
