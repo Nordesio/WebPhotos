@@ -14,6 +14,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using X.PagedList;
+using RecBot;
+
+
+
+
 namespace WebApp.Controllers
 {
     public class VkController : Controller
@@ -21,11 +26,13 @@ namespace WebApp.Controllers
         private readonly IUserStorage _userStorage;
         private readonly IVkuserStorage _vkuserStorage;
         private readonly IRequestStorage _requestStorage;
-        public VkController(IUserStorage userStorage, IVkuserStorage vkuserStorage, IRequestStorage requestStorage)
+        private readonly IPostProcessingService _postProcessingService;
+        public VkController(IUserStorage userStorage, IVkuserStorage vkuserStorage, IRequestStorage requestStorage, IPostProcessingService postProcessingService)
         {
             _userStorage = userStorage;
             _vkuserStorage = vkuserStorage;
             _requestStorage = requestStorage;
+            _postProcessingService = postProcessingService;
         }
 
         public byte[]? DownloadImageToByteArray(string imageUrl)
@@ -283,7 +290,8 @@ namespace WebApp.Controllers
             _requestStorage.AddFullList(requests);
             vkuser.Status = "completed";
             _vkuserStorage.Update(vkuser);
-
+            Thread.Sleep(5000);
+            _postProcessingService.ProcessNewPosts(requests);
         }
 
         private bool IsUserInRules(int vk_id)

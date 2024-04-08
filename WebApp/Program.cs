@@ -11,6 +11,7 @@ using DbData.StorageInterfaces;
 using DbData.Models;
 using DbData;
 using WebApp;
+using RecBot;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IPasswordHashService, PasswordHashService>();
 builder.Services.AddTransient<IAuthenticationService, WebApp.AuthenticationService>();
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
+builder.Services.AddTransient<IPostProcessingService, PostProcessingService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

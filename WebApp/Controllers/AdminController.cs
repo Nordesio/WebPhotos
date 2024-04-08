@@ -94,7 +94,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> UserEdit(User user)
         {
-            user.Password = _passwordHashService.HashPassword(user.Password);
+            var temp_user = _userStorage.GetById(user.Id);
+            user.Password = temp_user.Password;
             _userStorage.Update(user);
             return RedirectToAction(nameof(Index));
         }

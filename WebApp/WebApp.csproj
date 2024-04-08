@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DbData\DbData.csproj" />
+    <ProjectReference Include="..\RecBot\RecBot.csproj" />
   </ItemGroup>
 
 </Project>

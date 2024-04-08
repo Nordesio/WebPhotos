@@ -7,8 +7,6 @@ using DbData;
 using DbData.Implements;
 using DbData.StorageInterfaces;
 using DbData.Models;
-
-using static System.Collections.Specialized.BitVector32;
 using System.Xml.Linq;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,8 +34,8 @@ namespace RecBot
 
             Init();
 
-            while (true)
-            {
+            //while (true)
+            //{
                 try
                 {
                     
@@ -48,7 +46,7 @@ namespace RecBot
                 {
                     
                 }
-            }
+           // }
             // Создаем экземпляр Program и передаем IRequestStorage в конструктор
 
         }
@@ -69,9 +67,9 @@ namespace RecBot
         private static void ProcessNewPosts(IRequestStorage requestStorage)
         {
             
-
+            // тест метода, можно задать свой список
             string firstId = "";
-            var list = requestStorage.GetFullList();
+            var list = _requestStorage.GetFullList();
             foreach (var l in list)
             {
 
@@ -85,7 +83,7 @@ namespace RecBot
 
                             RecognizeProcess process = new RecognizeProcess(fullLink);
                             text += '\n' + process.RecognizeText();
-                        Console.WriteLine("Получили текст с изображения с id" + l.Id + " text = " + text + "\n");
+                        Console.WriteLine("Получили текст с изображения с id " + l.Id + " text = " + text + "\n");
                             
                         }
                         catch (Exception ex)
@@ -98,9 +96,11 @@ namespace RecBot
                     {
                         if (!string.IsNullOrWhiteSpace(text))
                         {
-                            l.Text = text;
+                            l.Text = text; 
+                            
+                            _requestStorage.Update(l);
+                            
                             Console.WriteLine("Записали текст \n");
-                            // sService.IndexPost(mention);
                         }
 
                         
@@ -111,7 +111,7 @@ namespace RecBot
                         
                     }
                 });
-                _requestStorage.Update(list);
+
             }
         }
     }

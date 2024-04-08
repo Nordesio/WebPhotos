@@ -63,7 +63,7 @@ namespace RecBot
 
                 answer = GetRecognized();
 
-                //DeleteDirectory();
+                DeleteDirectory();
             }
             catch (Exception ex)
             {
