@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EP.Morph.Morphology">
+    <Position X="0.75" Y="0.75" Width="2" />
+    <Members>
+      <Method Name="ConvertAdverbToAdjective" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Morph.MorphToken">
+    <Position X="6" Y="1" Width="1.5" />
+    <Members>
+      <Method Name="GetSourceText" Hidden="true" />
+      <Method Name="MorphToken" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Field Name="WordForms" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Morph.MorphWordForm">
+    <Position X="3.5" Y="1" Width="1.5" />
+    <Members>
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="CopyToWordForm" Hidden="true" />
+      <Method Name="MorphWordForm" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Morph.MorphBaseInfo">
+    <Position X="3.5" Y="4" Width="1.5" />
+    <Members>
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="ContainsAttr" Hidden="true" />
+      <Method Name="CopyTo" Hidden="true" />
+      <Method Name="MorphBaseInfo" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Gender" Type="EP.Morph.MorphGender" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="4.688" />
+        <Point X="2.75" Y="4.688" />
+        <Point X="2.75" Y="7" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Case" Type="EP.Morph.MorphCase" FixedFromPoint="true">
+      <Path>
+        <Point X="3.5" Y="4.312" />
+        <Point X="2.25" Y="4.312" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Gender" />
+      <Property Name="Number" />
+      <Property Name="Case" />
+      <Property Name="Class" />
+      <Property Name="Language" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Morph.MorphCase">
+    <Position X="0.75" Y="3.75" Width="1.5" />
+    <Members>
+      <Field Name="Accusative" Hidden="true" />
+      <Field Name="AllCases" Hidden="true" />
+      <Field Name="Common" Hidden="true" />
+      <Field Name="Dative" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Field Name="Genitive" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="Instrumental" Hidden="true" />
+      <Method Name="MorphCase" Hidden="true" />
+      <Field Name="Nominative" Hidden="true" />
+      <Method Name="op_Inequality" Hidden="true" />
+      <Method Name="op_BitwiseAnd" Hidden="true" />
+      <Method Name="op_ExclusiveOr" Hidden="true" />
+      <Method Name="op_BitwiseOr" Hidden="true" />
+      <Method Name="op_Equality" Hidden="true" />
+      <Method Name="Parse" Hidden="true" />
+      <Field Name="Partial" Hidden="true" />
+      <Field Name="Possessive" Hidden="true" />
+      <Field Name="Prepositional" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Field Name="Undefined" Hidden="true" />
+      <Field Name="Value" Hidden="true" />
+      <Field Name="Vocative" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Morph.MorphClass">
+    <Position X="6" Y="4" Width="1.5" />
+    <Members>
+      <Field Name="Adjective" Hidden="true" />
+      <Field Name="Adverb" Hidden="true" />
+      <Field Name="Conjunction" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Method Name="IsAdjectiveInt" Hidden="true" />
+      <Method Name="IsAdverbInt" Hidden="true" />
+      <Method Name="IsConjunctionInt" Hidden="true" />
+      <Method Name="IsMiscInt" Hidden="true" />
+      <Method Name="IsNounInt" Hidden="true" />
+      <Method Name="IsPersonalPronounInt" Hidden="true" />
+      <Method Name="IsPrepositionInt" Hidden="true" />
+      <Method Name="IsPronounInt" Hidden="true" />
+      <Method Name="IsProperGeoInt" Hidden="true" />
+      <Method Name="IsProperInt" Hidden="true" />
+      <Method Name="IsProperNameInt" Hidden="true" />
+      <Method Name="IsProperSecnameInt" Hidden="true" />
+      <Method Name="IsProperSurnameInt" Hidden="true" />
+      <Method Name="IsVerbInt" Hidden="true" />
+      <Method Name="MorphClass" Hidden="true" />
+      <Field Name="Noun" Hidden="true" />
+      <Method Name="op_Inequality" Hidden="true" />
+      <Method Name="op_BitwiseAnd" Hidden="true" />
+      <Method Name="op_ExclusiveOr" Hidden="true" />
+      <Method Name="op_BitwiseOr" Hidden="true" />
+      <Method Name="op_Equality" Hidden="true" />
+      <Field Name="PersonalPronoun" Hidden="true" />
+      <Field Name="Preposition" Hidden="true" />
+      <Field Name="Pronoun" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Field Name="Undefined" Hidden="true" />
+      <Field Name="Value" Hidden="true" />
+      <Field Name="Verb" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Morph.MorphLang">
+    <Position X="4.25" Y="7" Width="1.5" />
+    <Members>
+      <Field Name="BY" Hidden="true" />
+      <Field Name="EN" Hidden="true" />
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="GetHashCode" Hidden="true" />
+      <Field Name="IT" Hidden="true" />
+      <Field Name="KZ" Hidden="true" />
+      <Method Name="MorphLang" Hidden="true" />
+      <Method Name="op_Inequality" Hidden="true" />
+      <Method Name="op_BitwiseAnd" Hidden="true" />
+      <Method Name="op_BitwiseOr" Hidden="true" />
+      <Method Name="op_Equality" Hidden="true" />
+      <Field Name="RU" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="TryParse" Hidden="true" />
+      <Field Name="UA" Hidden="true" />
+      <Field Name="Unknown" Hidden="true" />
+      <Field Name="Value" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="EP.Morph.MorphGender">
+    <Position X="2" Y="7" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="EP.Morph.MorphNumber">
+    <Position X="3.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

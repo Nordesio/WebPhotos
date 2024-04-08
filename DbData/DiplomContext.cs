@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using DbData.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace DbData;
 
 public partial class DiplomContext : DbContext
@@ -14,6 +15,8 @@ public partial class DiplomContext : DbContext
         : base(options)
     {
     }
+
+    public virtual DbSet<Entity> Entities { get; set; }
 
     public virtual DbSet<Request> Requests { get; set; }
 
@@ -29,6 +32,28 @@ public partial class DiplomContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Entity>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Entities_pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.Geo).HasColumnName("geo");
+            entity.Property(e => e.Money).HasColumnName("money");
+            entity.Property(e => e.Namedentity).HasColumnName("namedentity");
+            entity.Property(e => e.Organization).HasColumnName("organization");
+            entity.Property(e => e.Person).HasColumnName("person");
+            entity.Property(e => e.RequestId).HasColumnName("request_id");
+            entity.Property(e => e.Street).HasColumnName("street");
+
+            entity.HasOne(d => d.Request).WithMany(p => p.Entities)
+                .HasForeignKey(d => d.RequestId)
+                .HasConstraintName("Enity_request");
+        });
+
         modelBuilder.Entity<Request>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("Requests_pkey");
@@ -39,6 +64,7 @@ public partial class DiplomContext : DbContext
             entity.Property(e => e.AuthorLink).HasColumnName("author_link");
             entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.ImageByte).HasColumnName("image_byte");
+            entity.Property(e => e.ImageLink).HasColumnName("image_link");
             entity.Property(e => e.Text).HasColumnName("text");
             entity.Property(e => e.Url).HasColumnName("url");
             entity.Property(e => e.VkuserId).HasColumnName("vkuser_id");
@@ -56,8 +82,7 @@ public partial class DiplomContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("Users_pkey");
-            entity.Property(e => e.Id)
-              .ValueGeneratedOnAdd(); 
+
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.EmailConfirmed).HasColumnName("Email_confirmed");
 

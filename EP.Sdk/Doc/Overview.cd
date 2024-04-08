@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EP.Ner.TextAnnotation">
+    <Position X="4.5" Y="4" Width="1.75" />
+    <Members>
+      <Field Name="EssentialForOccurence" Hidden="true" />
+      <Method Name="GetText" Hidden="true" />
+      <Field Name="Tag" Hidden="true" />
+      <Method Name="TextAnnotation" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Sofa" />
+      <Property Name="OccurenceOf" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.ReferentClass">
+    <Position X="6.75" Y="3.25" Width="2.25" />
+    <Members>
+      <Method Name="AddFeature" Hidden="true" />
+      <Method Name="FindFeature" Hidden="true" />
+      <Field Name="HideInGraph" Hidden="true" />
+      <Method Name="ReferentClass" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Referent">
+    <Position X="4.5" Y="6.25" Width="2.25" />
+    <Members>
+      <Method Name="_mergeExtReferents" Hidden="true" />
+      <Method Name="AddExtReferent" Hidden="true" />
+      <Method Name="AddOccurence" Hidden="true" />
+      <Method Name="AddSlot" Hidden="true" />
+      <Field Name="ATTR_GENERAL" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="CheckOccurence" Hidden="true" />
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="Deserialize" Hidden="true" />
+      <Method Name="FindNearOccurence" Hidden="true" />
+      <Method Name="FindSlot" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="GetIntValue" Hidden="true" />
+      <Method Name="GetStringValue" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Method Name="Referent" Hidden="true" />
+      <Field Name="RepositoryItemId" Hidden="true" />
+      <Method Name="Serialize" Hidden="true" />
+      <Property Name="Tag" Hidden="true" />
+      <Method Name="ToSortString" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="TypeName" Hidden="true" />
+      <Method Name="UploadSlot" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Enum Name="EP.Ner.Referent.EqualType" Collapsed="true">
+        <TypeIdentifier />
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="OntologyItems" Type="EP.Ner.ExtOntologyItem" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="8.145" />
+        <Point X="7.938" Y="8.145" />
+        <Point X="7.938" Y="8.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.088" Y="0.748" Height="0.16" Width="2.371" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="InstanceOf" Type="EP.Ner.ReferentClass" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="6.967" />
+        <Point X="7.625" Y="6.967" />
+        <Point X="7.625" Y="4.777" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Occurrence" Type="EP.Ner.TextAnnotation" FixedFromPoint="true">
+      <Path>
+        <Point X="5.75" Y="6.25" />
+        <Point X="5.75" Y="5.145" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.961" Y="0.256" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="InstanceOf" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="OntologyItems" />
+      <Property Name="Occurrence" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.SourceOfAnalysis">
+    <Position X="0.5" Y="3.25" Width="2.5" />
+    <Members>
+      <Method Name="CalcWhitespaceDistanceBetweenPositions" Hidden="true" />
+      <Field Name="ClearDust" Hidden="true" />
+      <Field Name="CrlfCorrectedCount" Hidden="true" />
+      <Method Name="Deserialize" Hidden="true" />
+      <Method Name="Serialize" Hidden="true" />
+      <Method Name="SourceOfAnalysis" Hidden="true" />
+      <Method Name="Substring" Hidden="true" />
+      <Property Name="Tag" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.AnalysisResult">
+    <Position X="0.5" Y="6" Width="2.25" />
+    <Members>
+      <Method Name="AnalysisResult" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="FirstToken" Type="EP.Ner.Token" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.312" Y="7.692" />
+        <Point X="1.312" Y="8.067" />
+        <Point X="1.312" Y="8.067" />
+        <Point X="1.312" Y="8.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Ontology" Type="EP.Ner.ExtOntology" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.375" Y="7.692" />
+        <Point X="2.375" Y="9.375" />
+        <Point X="3" Y="9.375" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.258" Y="-0.349" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Sofas" Type="EP.Ner.SourceOfAnalysis">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.17" Y="0.255" Height="0.16" Width="2.123" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="FirstToken" />
+      <Field Name="Ontology" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sofas" />
+      <Property Name="Entities" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.ProcessorService">
+    <Position X="6.25" Y="0.5" Width="3" />
+    <Members>
+      <Method Name="Create" Hidden="true" />
+      <Method Name="GetImageById" Hidden="true" />
+      <Method Name="RegisterAnalyzer" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Analyzers" Type="EP.Ner.Analyzer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="0.812" />
+        <Point X="4.812" Y="0.812" />
+        <Point X="4.812" Y="1.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-2.565" Y="0.787" Height="0.16" Width="2.472" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="Analyzers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.Analyzer">
+    <Position X="3.5" Y="1.25" Width="2" />
+    <Members>
+      <Method Name="Analyzer" Hidden="true" />
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="CreateAnalyzerData" Hidden="true" />
+      <Method Name="CreateReferent" Hidden="true" />
+      <Property Name="Images" Hidden="true" />
+      <Method Name="OnMessage" Hidden="true" />
+      <Method Name="OnProgress" Hidden="true" />
+      <Method Name="Process" Hidden="true" />
+      <Method Name="ProcessOntologyItem" Hidden="true" />
+      <Method Name="ProcessReferent" Hidden="true" />
+      <Property Name="ProgressWeight" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="UsedExternObjectTypes" Hidden="true" />
+    </Members>
+    <AssociationLine Name="TypeSystem" Type="EP.Ner.ReferentClass" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.625" Y="2.889" />
+        <Point X="4.625" Y="3.625" />
+        <Point X="6.75" Y="3.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.068" Y="0.435" Height="0.16" Width="3.225" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="TypeSystem" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.Processor">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="AddAnalyzer" Hidden="true" />
+      <Method Name="DelAnalyzer" Hidden="true" />
+      <Method Name="DeserializeReferent" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="FindAnalyzer" Hidden="true" />
+      <Method Name="ManageReferentLinks" Hidden="true" />
+      <Field Name="MiscData" Hidden="true" />
+      <Field Name="Tag" Hidden="true" />
+      <Field Name="TimeoutSeconds" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Analyzers" Type="EP.Ner.Analyzer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="0.812" />
+        <Point X="4.438" Y="0.812" />
+        <Point X="4.438" Y="1.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.648" Y="0.798" Height="0.16" Width="2.754" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="Analyzers" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EP.Ner.Token" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.ExtOntology">
+    <Position X="3" Y="9" Width="2" />
+    <Members>
+      <Method Name="_getAnalyzerData" Hidden="true" />
+      <Method Name="AttachReferent" Hidden="true" />
+      <Method Name="AttachToken" Hidden="true" />
+      <Method Name="ExtOntology" Hidden="true" />
+      <Method Name="Refresh" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Items" Type="EP.Ner.ExtOntologyItem">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.046" Y="0.05" Height="0.16" Width="2.152" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Field Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.ExtOntologyItem">
+    <Position X="7" Y="8.75" Width="1.75" />
+    <Members>
+      <Method Name="ExtOntologyItem" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

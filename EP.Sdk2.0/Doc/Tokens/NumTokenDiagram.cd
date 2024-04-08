@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="EP.Ner.NumberToken">
+    <Position X="0.75" Y="3.5" Width="2.25" />
+    <Members>
+      <Method Name="GetNormalCaseText" Hidden="true" />
+      <Property Name="IsNumber" Hidden="true" />
+      <Method Name="NumberToken" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Core.NumberHelper">
+    <Position X="0.75" Y="0.5" Width="5.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Core.NumberExToken">
+    <Position X="4" Y="3.5" Width="2.25" />
+    <Members>
+      <Field Name="AltRestMoney" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="ExTyp" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Money.MoneyReferent">
+    <Position X="0.75" Y="6" Width="2.75" />
+    <Members>
+      <Field Name="ATTR_ALTREST" Hidden="true" />
+      <Field Name="ATTR_ALTVALUE" Hidden="true" />
+      <Field Name="ATTR_CURRENCY" Hidden="true" />
+      <Field Name="ATTR_REST" Hidden="true" />
+      <Field Name="ATTR_VALUE" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="MoneyReferent" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="EP.Ner.Core.NumberExType">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

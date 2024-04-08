@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{635573F4-6AA9-479D-A0A5-2294CB26E79F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EP</RootNamespace>
+    <AssemblyName>EP.Sdk</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\release\</OutputPath>
+    <DefineConstants>TRACE;SUPPORT20</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="EP.Analyzer.Biblio.dll" />
+    <Content Include="EP.Analyzer.Biblio.xml" />
+    <Content Include="EP.Analyzer.Decree.dll" />
+    <Content Include="EP.Analyzer.Decree.xml" />
+    <Content Include="EP.Analyzer.Goods.dll" />
+    <Content Include="EP.Analyzer.Goods.xml" />
+    <Content Include="EP.Analyzer.Location.dll" />
+    <Content Include="EP.Analyzer.Location.xml" />
+    <Content Include="EP.Analyzer.Misc.dll" />
+    <Content Include="EP.Analyzer.Misc.xml" />
+    <Content Include="EP.Analyzer.Organization.dll" />
+    <Content Include="EP.Analyzer.Organization.xml" />
+    <Content Include="EP.Analyzer.Person.dll" />
+    <Content Include="EP.Analyzer.Person.xml" />
+    <Content Include="EP.Analyzer.Semantic.dll" />
+    <Content Include="EP.Analyzer.Semantic.xml" />
+    <Content Include="EP.Analyzer.Util.dll" />
+    <Content Include="EP.Analyzer.Util.xml" />
+    <Content Include="EP.Core.dll" />
+    <Content Include="EP.Core.xml" />
+    <None Include="Doc\Morphology.cd" />
+    <None Include="Doc\Ontology.cd" />
+    <None Include="Doc\Repository.cd" />
+    <None Include="Doc\SDK_Pullenti.docx" />
+    <None Include="Doc\Tokens\AnalysisKitDiagram.cd" />
+    <None Include="Doc\Tokens\BracketTokenDiagram.cd" />
+    <None Include="Doc\Tokens\MiscHelperDiagram.cd" />
+    <None Include="Doc\Tokens\NounPhraseTokenDiagram.cd" />
+    <None Include="Doc\Tokens\NumTokenDiagram.cd" />
+    <None Include="Doc\Tokens\TerminCollectionDiagram.cd" />
+    <None Include="Doc\Tokens\Tokens.cd" />
+    <Content Include="EP.Explanatory.dll" />
+    <Content Include="EP.Explanatory.xml" />
+    <Content Include="EP.Morphology.dll" />
+    <Content Include="EP.Morphology.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Doc\Referents.cd" />
+    <None Include="Doc\Overview.cd" />
+    <None Include="Doc\SDK_Pullenti.pdf" />
+    <None Include="Doc\TargetReferents.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EP.Analyzer.Biblio, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Biblio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Decree, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Decree.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Goods, Version=1.0.6991.27071, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Goods.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Location, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Location.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Misc, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Misc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Organization, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Organization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Person, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Person.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Semantic, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Semantic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Analyzer.Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Analyzer.Util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Core, Version=2.35.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Explanatory, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Explanatory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EP.Morphology, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\EP.Morphology.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Initializing.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

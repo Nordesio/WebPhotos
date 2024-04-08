@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EP.Ner.Feature">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <Members>
+      <Method Name="AddValue" Hidden="true" />
+      <Method Name="ConvertInnerValueToOuterValue" Hidden="true" />
+      <Method Name="ConvertOuterValueToInnerValue" Hidden="true" />
+      <Method Name="Feature" Hidden="true" />
+      <Field Name="InnerValues" Hidden="true" />
+      <Field Name="OuterValues" Hidden="true" />
+      <Field Name="OuterValuesEN" Hidden="true" />
+      <Field Name="OuterValuesUA" Hidden="true" />
+      <Property Name="ShowAsParent" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Slot">
+    <Position X="5.25" Y="3.25" Width="1.75" />
+    <Members>
+      <Method Name="ConvertValueToString" Hidden="true" />
+      <Method Name="Delete" Hidden="true" />
+      <Property Name="IsInternal" Hidden="true" />
+      <Method Name="Slot" Hidden="true" />
+      <Property Name="Tag" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Owner" />
+      <Property Name="DefiningFeature" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.TextAnnotation">
+    <Position X="1.25" Y="6" Width="2.25" />
+    <Members>
+      <Field Name="Tag" Hidden="true" />
+      <Method Name="TextAnnotation" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="OccurenceOf" Type="EP.Ner.Referent">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.263" Y="0.235" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Sofa" />
+      <Property Name="OccurenceOf" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.ReferentClass">
+    <Position X="1.25" Y="0.5" Width="2" />
+    <Members>
+      <Method Name="AddFeature" Hidden="true" />
+      <Field Name="HideInGraph" Hidden="true" />
+      <Method Name="ReferentClass" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="Features" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.Referent">
+    <Position X="1" Y="2.75" Width="2.75" />
+    <Members>
+      <Method Name="_mergeExtReferents" Hidden="true" />
+      <Method Name="AddExtReferent" Hidden="true" />
+      <Method Name="AddOccurence" Hidden="true" />
+      <Method Name="AddSlot" Hidden="true" />
+      <Field Name="ATTR_GENERAL" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="CheckOccurence" Hidden="true" />
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="Deserialize" Hidden="true" />
+      <Method Name="FindNearOccurence" Hidden="true" />
+      <Method Name="FindSlot" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="GetIntValue" Hidden="true" />
+      <Method Name="GetStringValue" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Method Name="Referent" Hidden="true" />
+      <Field Name="RepositoryItemId" Hidden="true" />
+      <Method Name="Serialize" Hidden="true" />
+      <Property Name="Tag" Hidden="true" />
+      <Method Name="ToSortString" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="TypeName" Hidden="true" />
+      <Method Name="UploadSlot" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Enum Name="EP.Ner.Referent.EqualType" Collapsed="true">
+        <TypeIdentifier />
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="Occurrence" Type="EP.Ner.TextAnnotation">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.483" Y="0.112" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="InstanceOf" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Slots" />
+      <Property Name="Occurrence" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.SourceOfAnalysis">
+    <Position X="4.75" Y="6" Width="2.5" />
+    <Members>
+      <Method Name="CalcWhitespaceDistanceBetweenPositions" Hidden="true" />
+      <Field Name="ClearDust" Hidden="true" />
+      <Field Name="CrlfCorrectedCount" Hidden="true" />
+      <Method Name="SourceOfAnalysis" Hidden="true" />
+      <Method Name="Substring" Hidden="true" />
+      <Property Name="Tag" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

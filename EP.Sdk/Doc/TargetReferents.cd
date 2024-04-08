@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EP.Ner.Date.DateReferent">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="ATTR_CENTURY" Hidden="true" />
+      <Field Name="ATTR_DAY" Hidden="true" />
+      <Field Name="ATTR_DAYOFWEEK" Hidden="true" />
+      <Field Name="ATTR_HIGHER" Hidden="true" />
+      <Field Name="ATTR_HOUR" Hidden="true" />
+      <Field Name="ATTR_MINUTE" Hidden="true" />
+      <Field Name="ATTR_MONTH" Hidden="true" />
+      <Field Name="ATTR_POINTER" Hidden="true" />
+      <Field Name="ATTR_SECOND" Hidden="true" />
+      <Field Name="ATTR_YEAR" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="Compare" Hidden="true" />
+      <Method Name="DateReferent" Hidden="true" />
+      <Property Name="Dt" Hidden="true" />
+      <Method Name="IsMonthDefined" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Property Name="ParentReferent" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Higher" Type="EP.Ner.Date.DateReferent" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.25" Y="1.633" />
+        <Point X="2.5" Y="1.633" />
+        <Point X="2.5" Y="2.281" />
+        <Point X="2.25" Y="2.281" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Higher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Date.DateRangeReferent">
+    <Position X="3.25" Y="0.75" Width="1.75" />
+    <Members>
+      <Field Name="ATTR_FROM" Hidden="true" />
+      <Field Name="ATTR_TO" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="DateRangeReferent" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="DateTo" Type="EP.Ner.Date.DateReferent" FixedFromPoint="true">
+      <Path>
+        <Point X="3.25" Y="1.438" />
+        <Point X="2.25" Y="1.438" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="DateFrom" />
+      <Property Name="DateTo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Phone.PhoneReferent">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Members>
+      <Field Name="ATTR_ADDNUMBER" Hidden="true" />
+      <Field Name="ATTR_COUNTRYCODE" Hidden="true" />
+      <Field Name="ATTR_KIND" Hidden="true" />
+      <Field Name="ATTR_NUNBER" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="PhoneReferent" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Person.PersonReferent">
+    <Position X="0.75" Y="8.25" Width="1.5" />
+    <Members>
+      <Method Name="AddAttribute" Hidden="true" />
+      <Field Name="ATTR_AGE" Hidden="true" />
+      <Field Name="ATTR_ATTR" Hidden="true" />
+      <Field Name="ATTR_BORN" Hidden="true" />
+      <Field Name="ATTR_CONTACT" Hidden="true" />
+      <Field Name="ATTR_DIE" Hidden="true" />
+      <Field Name="ATTR_FIRSTNAME" Hidden="true" />
+      <Field Name="ATTR_IDDOC" Hidden="true" />
+      <Field Name="ATTR_IDENTITY" Hidden="true" />
+      <Field Name="ATTR_LASTNAME" Hidden="true" />
+      <Field Name="ATTR_MIDDLENAME" Hidden="true" />
+      <Field Name="ATTR_NICKNAME" Hidden="true" />
+      <Field Name="ATTR_SEX" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="PersonReferent" Hidden="true" />
+      <Field Name="ShowLastnameOnFirstPosition" Hidden="true" />
+      <Method Name="ToSortString" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Person.PersonPropertyReferent">
+    <Position X="0.5" Y="5.75" Width="2" />
+    <Members>
+      <Field Name="ATTR_ATTR" Hidden="true" />
+      <Field Name="ATTR_HIGHER" Hidden="true" />
+      <Field Name="ATTR_NAME" Hidden="true" />
+      <Field Name="ATTR_REF" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="CanHasRef" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="PersonPropertyReferent" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Higher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Titlepage.TitlePageReferent">
+    <Position X="2.75" Y="8.25" Width="2" />
+    <Members>
+      <Field Name="ATTR_AFFIRMANT" Hidden="true" />
+      <Field Name="ATTR_ATTR" Hidden="true" />
+      <Field Name="ATTR_AUTHOR" Hidden="true" />
+      <Field Name="ATTR_CITY" Hidden="true" />
+      <Field Name="ATTR_CONSULTANT" Hidden="true" />
+      <Field Name="ATTR_DATE" Hidden="true" />
+      <Field Name="ATTR_DEP" Hidden="true" />
+      <Field Name="ATTR_EDITOR" Hidden="true" />
+      <Field Name="ATTR_NAME" Hidden="true" />
+      <Field Name="ATTR_OPPONENT" Hidden="true" />
+      <Field Name="ATTR_ORG" Hidden="true" />
+      <Field Name="ATTR_SPECIALITY" Hidden="true" />
+      <Field Name="ATTR_STUDENTYEAR" Hidden="true" />
+      <Field Name="ATTR_SUPERVISOR" Hidden="true" />
+      <Field Name="ATTR_TRANSLATOR" Hidden="true" />
+      <Field Name="ATTR_TYPE" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="TitlePageReferent" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Address.AddressReferent">
+    <Position X="5.5" Y="3.75" Width="2" />
+    <Members>
+      <Method Name="AddReferent" Hidden="true" />
+      <Method Name="AddressReferent" Hidden="true" />
+      <Field Name="ATTR_BLOCK" Hidden="true" />
+      <Field Name="ATTR_BOX" Hidden="true" />
+      <Field Name="ATTR_BTI" Hidden="true" />
+      <Field Name="ATTR_BUILDING" Hidden="true" />
+      <Field Name="ATTR_BUILDINGTYPE" Hidden="true" />
+      <Field Name="ATTR_CORPUS" Hidden="true" />
+      <Field Name="ATTR_CORPUSORFLAT" Hidden="true" />
+      <Field Name="ATTR_CSP" Hidden="true" />
+      <Field Name="ATTR_DETAIL" Hidden="true" />
+      <Field Name="ATTR_DETAILPARAM" Hidden="true" />
+      <Field Name="ATTR_FIAS" Hidden="true" />
+      <Field Name="ATTR_FLAT" Hidden="true" />
+      <Field Name="ATTR_FLOOR" Hidden="true" />
+      <Field Name="ATTR_GEO" Hidden="true" />
+      <Field Name="ATTR_HOUSE" Hidden="true" />
+      <Field Name="ATTR_HOUSETYPE" Hidden="true" />
+      <Field Name="ATTR_KILOMETER" Hidden="true" />
+      <Field Name="ATTR_METRO" Hidden="true" />
+      <Field Name="ATTR_MISC" Hidden="true" />
+      <Field Name="ATTR_OFFICE" Hidden="true" />
+      <Field Name="ATTR_PLOT" Hidden="true" />
+      <Field Name="ATTR_PORCH" Hidden="true" />
+      <Field Name="ATTR_POSTOFFICEBOX" Hidden="true" />
+      <Field Name="ATTR_STREET" Hidden="true" />
+      <Field Name="ATTR_ZIP" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Property Name="CorpusOrFlat" Hidden="true" />
+      <Property Name="CSP" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Property Name="ParentReferent" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Geos" Type="EP.Ner.Geo.GeoReferent">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.994" Y="0.102" Height="0.16" Width="1.805" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="Geos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EP.Ner.Referent">
+    <Position X="2.75" Y="3.25" Width="2" />
+    <Members>
+      <Method Name="_mergeExtReferents" Hidden="true" />
+      <Method Name="AddExtReferent" Hidden="true" />
+      <Method Name="AddOccurence" Hidden="true" />
+      <Method Name="AddOccurenceOfRefTok" Hidden="true" />
+      <Method Name="AddSlot" Hidden="true" />
+      <Field Name="ATTR_GENERAL" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="CheckOccurence" Hidden="true" />
+      <Method Name="Clone" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="Deserialize" Hidden="true" />
+      <Method Name="FindNearOccurence" Hidden="true" />
+      <Method Name="FindSlot" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="GetImageId" Hidden="true" />
+      <Method Name="GetIntValue" Hidden="true" />
+      <Method Name="GetStringValue" Hidden="true" />
+      <Method Name="GetStringValues" Hidden="true" />
+      <Method Name="GetValue" Hidden="true" />
+      <Property Name="InstanceOf" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Property Name="Occurrence" Hidden="true" />
+      <Field Name="OntologyItems" Hidden="true" />
+      <Method Name="Referent" Hidden="true" />
+      <Field Name="RepositoryItemId" Hidden="true" />
+      <Method Name="Serialize" Hidden="true" />
+      <Method Name="ToSortString" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="TypeName" Hidden="true" />
+      <Method Name="UploadSlot" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Enum Name="EP.Ner.Referent.EqualType" Collapsed="true">
+        <TypeIdentifier />
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Org.OrganizationReferent">
+    <Position X="5.25" Y="8.25" Width="2" />
+    <Members>
+      <Method Name="AddEponym" Hidden="true" />
+      <Method Name="AddName" Hidden="true" />
+      <Method Name="AddNameStr" Hidden="true" />
+      <Method Name="AddProfile" Hidden="true" />
+      <Method Name="AddSlot" Hidden="true" />
+      <Method Name="AddType" Hidden="true" />
+      <Method Name="AddTypeStr" Hidden="true" />
+      <Field Name="ATTR_EPONYM" Hidden="true" />
+      <Field Name="ATTR_GEO" Hidden="true" />
+      <Field Name="ATTR_HIGHER" Hidden="true" />
+      <Field Name="ATTR_KLADR" Hidden="true" />
+      <Field Name="ATTR_MISC" Hidden="true" />
+      <Field Name="ATTR_NAME" Hidden="true" />
+      <Field Name="ATTR_NUMBER" Hidden="true" />
+      <Field Name="ATTR_OWNER" Hidden="true" />
+      <Field Name="ATTR_PROFILE" Hidden="true" />
+      <Field Name="ATTR_TYPE" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CanBeEqualsEx" Hidden="true" />
+      <Method Name="CanBeGeneralFor" Hidden="true" />
+      <Method Name="CanBeHigher" Hidden="true" />
+      <Method Name="CanBeSecondDefinition" Hidden="true" />
+      <Method Name="ContainsProfile" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="CreateOntologyItemEx" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Method Name="GetStringValue" Hidden="true" />
+      <Property Name="Kind" Hidden="true" />
+      <Method Name="MergeSlots" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Method Name="OrganizationReferent" Hidden="true" />
+      <Property Name="ParentReferent" Hidden="true" />
+      <Method Name="ToSortString" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="UploadSlot" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Higher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Geo.GeoReferent">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Method Name="AddSlot" Hidden="true" />
+      <Field Name="ATTR_ALPHA2" Hidden="true" />
+      <Field Name="ATTR_BTI" Hidden="true" />
+      <Field Name="ATTR_HIGHER" Hidden="true" />
+      <Field Name="ATTR_NAME" Hidden="true" />
+      <Field Name="ATTR_REF" Hidden="true" />
+      <Field Name="ATTR_TYPE" Hidden="true" />
+      <Method Name="CanBeEquals" Hidden="true" />
+      <Method Name="CreateOntologyItem" Hidden="true" />
+      <Method Name="GeoReferent" Hidden="true" />
+      <Method Name="GetCompareStrings" Hidden="true" />
+      <Field Name="OBJ_TYPENAME" Hidden="true" />
+      <Property Name="TopHigher" Hidden="true" />
+      <Method Name="ToSortString" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Method Name="UploadSlot" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Higher" Type="EP.Ner.Geo.GeoReferent" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="1.375" />
+        <Point X="7.5" Y="1.375" />
+        <Point X="7.5" Y="2.25" />
+        <Point X="7.25" Y="2.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Higher" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

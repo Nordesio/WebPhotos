@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EP.Sdk\EP.Sdk.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EP.Analyzer.Biblio">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Biblio.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Decree">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Decree.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Goods">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Goods.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Location">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Location.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Misc">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Misc.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Organization">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Organization.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Person">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Person.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Semantic">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Semantic.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Util">
+      <HintPath>..\EP.Sdk\EP.Analyzer.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Core">
+      <HintPath>..\EP.Sdk\EP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Explanatory">
+      <HintPath>..\EP.Sdk\EP.Explanatory.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Morphology">
+      <HintPath>..\EP.Sdk\EP.Morphology.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

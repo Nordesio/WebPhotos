@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EP.Ner.Repository.RepositoryBase">
+    <Position X="1" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="GetIncomingItems" Hidden="true" />
+      <Method Name="GetOutgoingItems" Hidden="true" />
+      <Property Name="Processor" Hidden="true" />
+    </Members>
+    <AssociationLine Name="AllItems" Type="EP.Ner.Repository.RepositoryItem">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.15" Y="0.091" Height="0.16" Width="2.558" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Property Name="AllItems" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EP.Ner.Repository.RepositoryInputItem">
+    <Position X="4" Y="3.5" Width="2" />
+    <Members>
+      <Method Name="RepositoryInputItem" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Referent" Type="EP.Ner.Referent" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.062" Y="4.81" />
+        <Point X="5.062" Y="5.185" />
+        <Point X="7.438" Y="5.185" />
+        <Point X="7.438" Y="4.759" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Referent" />
+      <Field Name="Item" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Repository.RepositoryItem">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="CompareTo" Hidden="true" />
+      <Field Name="Repository" Hidden="true" />
+      <Method Name="RepositoryItem" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Referent" Type="EP.Ner.Referent" FixedFromPoint="true">
+      <Path>
+        <Point X="7.375" Y="3.013" />
+        <Point X="7.375" Y="4.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Referent" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EP.Ner.Referent" Collapsed="true">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

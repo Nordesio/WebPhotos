@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="EP.Ner.Core.AnalysisKit">
+    <Position X="0.5" Y="0.75" Width="4.25" />
+    <Members>
+      <Method Name="AnalysisKit" Hidden="true" />
+      <Field Name="RecurseLevel" Hidden="true" />
+      <Method Name="RefreshGenerals" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="Statistics" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EP.Ner.Core.StatisticCollection">
+    <Position X="5.75" Y="0.75" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="EP.Ner.Core.StatisticCollection.BigrammInfo">
+        <Members>
+          <Method Name="BigrammInfo" Hidden="true" />
+        </Members>
+        <TypeIdentifier />
+      </Class>
+      <Class Name="EP.Ner.Core.StatisticCollection.WordInfo">
+        <Members>
+          <Method Name="AddAfter" Hidden="true" />
+          <Method Name="AddBefore" Hidden="true" />
+          <Method Name="ToString" Hidden="true" />
+          <Method Name="WordInfo" Hidden="true" />
+        </Members>
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

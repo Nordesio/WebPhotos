@@ -24,5 +24,9 @@ public partial class Request
 
     public byte[]? ImageByte { get; set; }
 
+    public string? ImageLink { get; set; }
+
+    public virtual ICollection<Entity> Entities { get; set; } = new List<Entity>();
+
     public virtual Vkuser Vkuser { get; set; } = null!;
 }

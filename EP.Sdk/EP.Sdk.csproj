@@ -1,0 +1,107 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="EP.Analyzer.Biblio.dll" />
+    <None Remove="EP.Analyzer.Biblio.xml" />
+    <None Remove="EP.Analyzer.Decree.dll" />
+    <None Remove="EP.Analyzer.Decree.xml" />
+    <None Remove="EP.Analyzer.Goods.dll" />
+    <None Remove="EP.Analyzer.Goods.xml" />
+    <None Remove="EP.Analyzer.Location.dll" />
+    <None Remove="EP.Analyzer.Location.xml" />
+    <None Remove="EP.Analyzer.Misc.dll" />
+    <None Remove="EP.Analyzer.Misc.xml" />
+    <None Remove="EP.Analyzer.Organization.dll" />
+    <None Remove="EP.Analyzer.Organization.xml" />
+    <None Remove="EP.Analyzer.Person.dll" />
+    <None Remove="EP.Analyzer.Person.xml" />
+    <None Remove="EP.Analyzer.Semantic.dll" />
+    <None Remove="EP.Analyzer.Semantic.xml" />
+    <None Remove="EP.Analyzer.Util.dll" />
+    <None Remove="EP.Analyzer.Util.xml" />
+    <None Remove="EP.Core.dll" />
+    <None Remove="EP.Core.xml" />
+    <None Remove="EP.Explanatory.dll" />
+    <None Remove="EP.Explanatory.xml" />
+    <None Remove="EP.Morphology.dll" />
+    <None Remove="EP.Morphology.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="EP.Analyzer.Biblio.dll" />
+    <Content Include="EP.Analyzer.Biblio.xml" />
+    <Content Include="EP.Analyzer.Decree.dll" />
+    <Content Include="EP.Analyzer.Decree.xml" />
+    <Content Include="EP.Analyzer.Goods.dll" />
+    <Content Include="EP.Analyzer.Goods.xml" />
+    <Content Include="EP.Analyzer.Location.dll" />
+    <Content Include="EP.Analyzer.Location.xml" />
+    <Content Include="EP.Analyzer.Misc.dll" />
+    <Content Include="EP.Analyzer.Misc.xml" />
+    <Content Include="EP.Analyzer.Organization.dll" />
+    <Content Include="EP.Analyzer.Organization.xml" />
+    <Content Include="EP.Analyzer.Person.dll" />
+    <Content Include="EP.Analyzer.Person.xml" />
+    <Content Include="EP.Analyzer.Semantic.dll" />
+    <Content Include="EP.Analyzer.Semantic.xml" />
+    <Content Include="EP.Analyzer.Util.dll" />
+    <Content Include="EP.Analyzer.Util.xml" />
+    <Content Include="EP.Core.dll" />
+    <Content Include="EP.Core.xml" />
+    <Content Include="EP.Explanatory.dll" />
+    <Content Include="EP.Explanatory.xml" />
+    <Content Include="EP.Morphology.dll" />
+    <Content Include="EP.Morphology.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pullenti.Core" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EP.Analyzer.Biblio">
+      <HintPath>EP.Analyzer.Biblio.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Decree">
+      <HintPath>EP.Analyzer.Decree.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Goods">
+      <HintPath>EP.Analyzer.Goods.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Location">
+      <HintPath>EP.Analyzer.Location.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Misc">
+      <HintPath>EP.Analyzer.Misc.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Organization">
+      <HintPath>EP.Analyzer.Organization.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Person">
+      <HintPath>EP.Analyzer.Person.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Semantic">
+      <HintPath>EP.Analyzer.Semantic.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Analyzer.Util">
+      <HintPath>EP.Analyzer.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Core">
+      <HintPath>EP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Explanatory">
+      <HintPath>EP.Explanatory.dll</HintPath>
+    </Reference>
+    <Reference Include="EP.Morphology">
+      <HintPath>EP.Morphology.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

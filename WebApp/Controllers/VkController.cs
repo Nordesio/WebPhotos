@@ -67,7 +67,6 @@ namespace WebApp.Controllers
             string text = "";
             List<string> urls = new List<string>();
             List<DateTime> dates = new List<DateTime>();
-            string texts = "";
             string url = string.Format("https://api.vk.com/method/photos.getAll?access_token={0}&owner_id={1}&extended=1&offset={2}&count=200&photo_sizes=1&no_service_albums=0&need_hidden=0&skip_hidden=1&v=5.131", token, owner_id, offset);
             var parsed = JsonConvert.DeserializeObject(new WebClient().DownloadString(url));
             text = parsed.ToString();
@@ -127,24 +126,18 @@ namespace WebApp.Controllers
                     d = dateTime;
                     dates.Add(dateTime);
                 }
-                var texts_from_url = JsonObject.SelectTokens("response.items[" + i + "].text")
-              .Select(v => (string)v)
-              .ToList();
-                foreach (var ur in texts_from_url)
-                {
-                    texts = ur;
-                }
+
                 Request request = new Request();
                 request.VkuserId = vkuser.Id;
                 request.Date = DateOnly.FromDateTime((DateTime)d);
-                request.Text = texts;
                 request.ImageByte = DownloadImageToByteArray(u);
                 request.Url = ByteToString(request.ImageByte);
+                request.ImageLink = u;
                 Console.WriteLine("Скачано: " + u);
                 request.Author = last_name + " " + first_name;
                 request.AuthorId = owner_id;
                 // временно записываю ссылку на фото в эту переменную
-                request.AuthorLink = u;
+                request.AuthorLink = "https://vk.com/id" + owner_id;
                 Requests.Add(request);
             }
 
@@ -203,13 +196,6 @@ namespace WebApp.Controllers
                         d = dateTime;
                         dates.Add(dateTime);
                     }
-                    var texts_from_url = JsonObject.SelectTokens("response.items[" + i + "].text")
-                  .Select(v => (string)v)
-                  .ToList();
-                    foreach (var ur in texts_from_url)
-                    {
-                        texts = ur;
-                    }
 
                     Request request = new Request();
                     request.VkuserId = vkuser.Id;
@@ -222,13 +208,13 @@ namespace WebApp.Controllers
                         request.Date = null;
                     }
 
-                    request.Text = texts;
                     request.ImageByte = DownloadImageToByteArray(u);
                     request.Url = ByteToString(request.ImageByte);
+                    request.ImageLink = u;
                     request.Author = first_name + " " + last_name;
                     request.AuthorId = "id" + owner_id;
                     // временно записываю ссылку на фото в эту переменную
-                    request.AuthorLink = u;
+                    request.AuthorLink = "https://vk.com/id" + owner_id;
                     Requests.Add(request);
                 }
 

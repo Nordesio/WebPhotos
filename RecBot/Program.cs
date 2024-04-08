@@ -79,9 +79,9 @@ namespace RecBot
 
                         try
                         {
-                        string fullLink = l.AuthorLink;
+                        string fullLink = l.ImageLink;
 
-                            RecognizeProcess process = new RecognizeProcess(fullLink);
+                        RecognizeProcess process = new RecognizeProcess(fullLink);
                             text += '\n' + process.RecognizeText();
                         Console.WriteLine("Получили текст с изображения с id " + l.Id + " text = " + text + "\n");
                             

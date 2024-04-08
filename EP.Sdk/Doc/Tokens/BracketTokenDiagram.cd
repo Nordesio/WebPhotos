@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="EP.Ner.Core.BracketHelper">
+    <Position X="0.5" Y="0.5" Width="6.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EP.Ner.Core.BracketSequenceToken">
+    <Position X="0.5" Y="2.25" Width="4.75" />
+    <Members>
+      <Method Name="BracketSequenceToken" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+    <ShowAsCollectionAssociation>
+      <Field Name="Internal" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="EP.Ner.Core.BracketParseAttr">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

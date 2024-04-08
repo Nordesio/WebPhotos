@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Controllers;
 using Xunit;
-using KPO_Cursovaya.StorageInterfaces;
-using KPO_Cursovaya.Models;
+using DbData.StorageInterfaces;
+using DbData.Models;
 using Moq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
