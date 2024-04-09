@@ -15,15 +15,20 @@
         display: flex;
         padding: 10px;
     }
-
+    .details-container h3{
+        color: #4100ff;
+    }
     .image-container,
     .text-container {
         flex: 1;
         padding: 10px;
     }
-
+    .text-container-ls{
+        flex: 1;
+        padding: 10px;
+    }
         .image-container img,
-        .text-container h3 {
+        .text-container {
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
@@ -35,44 +40,58 @@
         <h1>Фотография</h1>
         <img src="@Model.Url" alt="Image" style="max-width: 100%;">
     </div>
-    <div class="text-container">
+    <div class="text-container-ls">
         @if (!string.IsNullOrWhiteSpace(Model.Text))
         {
             <h1>Текст с фотографии</h1>
-            <h3>@Model.Text</h3>
+            <div class="text-container"> 
+            <h4>@Model.Text</h4>
+            </div>
             @if (entity != null)
             {
-                @switch (entity)
+                <h1>Сущности, выявленные в тексте</h1>
+                <div class="text-container"> 
+                @if (!string.IsNullOrWhiteSpace(entity.Geo))
                 {
-                    case var e when !string.IsNullOrWhiteSpace(e.Geo):
-                        <h3>ГЕО: @e.Geo</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Date):
-                        <h3>Дата: @e.Date</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Organization):
-                        <h3>Организация: @e.Organization</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Namedentity):
-                        <h3>Наименования: @e.Namedentity</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Person):
-                        <h3>Люди: @e.Person</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Street):
-                        <h3>Улица: @e.Street</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Money):
-                        <h3>Деньги: @e.Money</h3>
-                        break;
-                    case var e when !string.IsNullOrWhiteSpace(e.Address):
-                        <h3>Адрес: @e.Address</h3>
-                        break;
-                    // Добавьте дополнительные case для других свойств, которые вы хотите отобразить
-                    default:
-                        // Обработка, если ни одно из свойств не прошло проверку
-                        break;
+                    <h3>ГЕО: </h3>
+                    <h4>@entity.Geo</h4>
                 }
+                @if (!string.IsNullOrWhiteSpace(entity.Date))
+                {
+                    <h3>Дата: </h3>
+                    <h4> @entity.Date</h4>
+                }
+                @if (!string.IsNullOrWhiteSpace(entity.Organization))
+                {
+                    <h3>Организация: </h3>
+                    <h4>@entity.Organization</h4>
+                }
+                @if (!string.IsNullOrWhiteSpace(entity.Namedentity))
+                {
+                    <h3>Наименования: </h3>
+                    <h4>@entity.Namedentity</h4>
+                }
+                @if (!string.IsNullOrWhiteSpace(entity.Person))
+                {
+                    <h3>Люди: </h3>
+                    <h4>@entity.Person</h4>
+                }
+                @if (!string.IsNullOrWhiteSpace(entity.Street))
+                {
+                    <h3>Улица: </h3>
+                    <h4>@entity.Street</h4>
+                }
+                @if (!string.IsNullOrWhiteSpace(entity.Money))
+                {
+                    <h3>Деньги: </h3>
+                    <h4>@entity.Money</h4>
+                }
+                @if (!string.IsNullOrWhiteSpace(entity.Address))
+                {
+                    <h3>Адрес: </h3>
+                    <h4>@entity.Address</h4>
+                }
+                </div>
             }
             else
             {
