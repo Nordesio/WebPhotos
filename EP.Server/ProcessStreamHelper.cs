@@ -10,11 +10,11 @@ using ProcessorService = EP.Ner.ProcessorService;
 using SourceOfAnalysis = EP.Ner.SourceOfAnalysis;
 using Referent = EP.Ner.Referent;
 
-namespace EP.DemoServer
+namespace EP.Server
 {
     static class ProcessStreamHelper
     {
-        public static void ProcessXml(string input, Stream output)
+        public static XmlWriter ProcessXml(string input, Stream output)
         {
             // извлекаем текст из потока
             string txt = input;
@@ -74,11 +74,11 @@ namespace EP.DemoServer
                     }
 
                     xml.WriteEndElement();
-
-                    xml.WriteEndElement();
                 }
                 xml.WriteEndDocument();
+                return xml;
             }
+            
         }
 
         // к сожалению, приходится корректировать строку, а то разное бывает, что портит XML

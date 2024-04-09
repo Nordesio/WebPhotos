@@ -60,7 +60,10 @@ namespace DbData.Implements
         public List<Request> GetByVkId(int id)
         {
             using var db = new DiplomContext();
-            return db.Requests.Where(c => c.VkuserId == id).ToList();
+            return db.Requests
+         .Where(c => c.VkuserId == id)
+         .OrderBy(c => c.Id) // Сортировка по возрастанию идентификаторов запросов
+         .ToList();
         }
         public Request GetById(int id)
         {

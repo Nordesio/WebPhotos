@@ -26,13 +26,15 @@ namespace WebApp.Controllers
         private readonly IUserStorage _userStorage;
         private readonly IVkuserStorage _vkuserStorage;
         private readonly IRequestStorage _requestStorage;
+        private readonly IEntityStorage _entityStorage;
         private readonly IPostProcessingService _postProcessingService;
-        public VkController(IUserStorage userStorage, IVkuserStorage vkuserStorage, IRequestStorage requestStorage, IPostProcessingService postProcessingService)
+        public VkController(IUserStorage userStorage, IVkuserStorage vkuserStorage, IRequestStorage requestStorage, IPostProcessingService postProcessingService, IEntityStorage entityStorage)
         {
             _userStorage = userStorage;
             _vkuserStorage = vkuserStorage;
             _requestStorage = requestStorage;
             _postProcessingService = postProcessingService;
+            _entityStorage = entityStorage; 
         }
 
         public byte[]? DownloadImageToByteArray(string imageUrl)
@@ -424,6 +426,17 @@ namespace WebApp.Controllers
         {
             // Загрузка данных о фотографии по imageId
             var image = _requestStorage.GetById(imageId);
+            try
+            {
+                var entities = _entityStorage.GetByRequestId(imageId);
+                ViewBag.entities = entities;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Ошибка - " + ex);
+            }
+
+            
             if (image == null)
             {
                 return Redirect(nameof(Index));

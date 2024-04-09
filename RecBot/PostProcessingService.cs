@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using EP.Server;
+using System.Diagnostics;
 
 namespace RecBot
 {
@@ -20,9 +21,12 @@ namespace RecBot
     {
         private readonly IRequestStorage _requestStorage;
 
-        public PostProcessingService(IRequestStorage requestStorage)
+        private readonly IEntitySearchService _entitySearchService; // Сервис для поиска сущностей
+
+        public PostProcessingService(IRequestStorage requestStorage, IEntitySearchService entitySearchService)
         {
             _requestStorage = requestStorage;
+            _entitySearchService = entitySearchService;
         }
 
         public void ProcessNewPosts(List<Request> list)
@@ -34,7 +38,7 @@ namespace RecBot
             //{
             try
             {
-                ProcessPosts(list);
+                Task.Run(async () => { await ProcessPostsAsync(list); });
                 //Thread.Sleep(1000 * 60 * 5);
             }
             catch (Exception ex)
@@ -57,54 +61,44 @@ namespace RecBot
 
 
         }
-        private void ProcessPosts(List<Request> list)
+        private async Task ProcessPostsAsync(List<Request> list)
         {
-            
-            string firstId = "";
-            //var list = _requestStorage.GetFullList();
+            Stopwatch stopwatch = new Stopwatch();
+            int firstId = -1;
+
             foreach (var l in list)
             {
-
-                Task.Run(() =>
+                if (firstId == -1)
                 {
-                    string text = "";
+                    firstId = l.Id;
+                    stopwatch.Start();
+                }
 
-                    try
+                try
+                {
+                    string fullLink = l.ImageLink;
+                    RecognizeProcess process = new RecognizeProcess(fullLink);
+                    string text = await Task.Run(() => process.RecognizeText());
+                    Console.WriteLine($"Получили текст с изображения с id {l.Id}: {text}");
+
+                    if (!string.IsNullOrWhiteSpace(text))
                     {
-                        string fullLink = l.ImageLink;
-
-                        RecognizeProcess process = new RecognizeProcess(fullLink);
-                        text += '\n' + process.RecognizeText();
-                        Console.WriteLine("Получили текст с изображения с id " + l.Id + " text = " + text + "\n");
-
+                        l.Text = text;
+                        _requestStorage.Update(l);
+                        _entitySearchService.SearchEntities(l);
+                        Console.WriteLine("Записали текст");
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Ошибка\n");
-                    }
-
-
-                    try
-                    {
-                        if (!string.IsNullOrWhiteSpace(text))
-                        {
-                            l.Text = text;
-
-                            _requestStorage.Update(l);
-                            //вызывать поиск сущностей
-                            Console.WriteLine("Записали текст \n");
-                        }
-
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Ошибка\n");
-
-                    }
-                });
-
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ошибка: {ex.Message}");
+                }
             }
+
+            // Засекаем время выполнения
+            stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
+            Console.WriteLine($"Время выполнения для первого запроса с id {firstId}: {elapsedTime}");
         }
 
     }

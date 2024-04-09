@@ -11,29 +11,38 @@ using DbData.Models;
 using System.Xml.Linq;
 using EP.Server;
 using Microsoft.Extensions.DependencyInjection;
-namespace EP.DemoServer
+using DbData.StorageInterfaces;
+
+namespace EP.Server
 {
-        class Program
+    public interface IEntitySearchService
     {
-        static void Main(string[] args)
+        void SearchEntities(Request req);
+    }
+
+    public class EntitySearchService : IEntitySearchService
+    {
+        private readonly IEntityStorage _entityStorage;
+        public EntitySearchService(IEntityStorage entityStorage)
         {
-
-
+            _entityStorage = entityStorage;
+        }
+        public void SearchEntities(Request req)
+        {
             Sdk.Initialize();
-           
+
 
             HashSet<string> filterAttributes = new HashSet<string>()
             { "PERSON", "GEO", "STREET", "NAMEDENTITY", "ORGANIZATION", "ADRRESS", "MONEY", "DATE"};
 
-                // Инициализируем список для хранения объектов Entity
-                List<Entity> entities = new List<Entity>();
+
+
+            // Инициализируем список для хранения объектов Entity
+            Entity entity = new Entity();
+            entity.RequestId = req.Id;
             using (MemoryStream output = new MemoryStream())
             {
-
-                
-                string text = "Правительство России задумало вернуть налог на движимое имущество, который отменили с 1 января 2019 года, еще при предыдущем составе кабмина. Об этом заявил замминистра финансов Алексей Лавров, пишут «Ведомости». Спикер Совета Федерации Валентина Матвиенко напомнила, что ранее предупреждали о негативных последствиях налогового послабления: «Освободить от налога стоило только новое оборудование, приобретаемое компаниями, но нас не послушали, все освободили». В 2019 году Минфин оценил выпадающие доходы в 183 миллиарда рублей. Компенсировать их предполагалось за счет роста цен на крепкий алкоголь, но добиться этого не удалось.";
-                //XmlWriter xmlWriter = ProcessStreamHelper.ProcessXml("Б-р Новосондецкий 11, кв-4. Сергей Радонежский. 1000 рублей.", output);
-                XmlWriter xmlWriter = ProcessStreamHelper.ProcessXml(text, output);
+                XmlWriter xmlWriter = ProcessStreamHelper.ProcessXml(req.Text, output);
                 // Переводим поток в строку, чтобы можно было дальше работать с XML
                 // Получаем XML-данные из потока
                 byte[] xmlBytes = output.ToArray();
@@ -46,7 +55,6 @@ namespace EP.DemoServer
                 var doc = new XmlDocument();
                 doc.LoadXml(xmlOut);
                 var xmlEntities = doc.GetElementsByTagName("entity");
-                Entity entity = new Entity();
                 foreach (XmlNode xmlEntity in xmlEntities)
                 {
                     Console.WriteLine("\n");
@@ -91,27 +99,23 @@ namespace EP.DemoServer
                             break;
                     }
                 }
-                entities.Add(entity);
-                    
+                _entityStorage.Insert(entity);
             }
-                
-
         }
 
-
-        private static string? GetAttributeValue(XmlNode xmlNode, string attributeName)
+        private string? GetAttributeValue(XmlNode xmlNode, string attributeName)
         {
             if (xmlNode.Attributes["type"].Value.Equals(attributeName))
             {
 
-            
-            var attributes = xmlNode.SelectNodes("attr");
-            string text = "";
-            foreach (XmlNode attributeNode in attributes)
-            {
-                text += attributeNode.Attributes["name"].Value + "; ";
-            }
-            return text;
+
+                var attributes = xmlNode.SelectNodes("attr");
+                string text = "";
+                foreach (XmlNode attributeNode in attributes)
+                {
+                    text += attributeNode.Attributes["name"].Value + "; ";
+                }
+                return text;
             }
             else { return null; }
         }

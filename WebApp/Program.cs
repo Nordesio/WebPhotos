@@ -12,6 +12,7 @@ using DbData.Models;
 using DbData;
 using WebApp;
 using RecBot;
+using EP.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +22,13 @@ builder.Services.AddTransient<IUserStorage, UserStorage>();
 builder.Services.AddTransient<IRoleStorage, RoleStorage>();
 builder.Services.AddTransient<IVkuserStorage, VkuserStorage>();
 builder.Services.AddTransient<IRequestStorage, RequestStorage>();
+builder.Services.AddTransient<IEntityStorage, EntityStorage>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IPasswordHashService, PasswordHashService>();
 builder.Services.AddTransient<IAuthenticationService, WebApp.AuthenticationService>();
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
 builder.Services.AddTransient<IPostProcessingService, PostProcessingService>();
-
+builder.Services.AddTransient<IEntitySearchService, EntitySearchService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {

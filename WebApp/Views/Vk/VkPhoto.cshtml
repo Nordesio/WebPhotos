@@ -1,7 +1,13 @@
 ﻿@model DbData.Models.Request
-
+@using DbData.Models;
 @{
     ViewBag.Title = "Детали фотографии";
+    Entity entity = null;
+    if (ViewBag.entities != null)
+    {
+         entity = ViewBag.entities as Entity;
+    }
+    
 }
 
 <style>
@@ -34,10 +40,39 @@
         {
             <h1>Текст с фотографии</h1>
             <h3>@Model.Text</h3>
-            @if (!string.IsNullOrWhiteSpace(Model.Text))
+            @if (entity != null)
             {
-                <h1>Выявленные сущности</h1>
-                <h3>@Model.Text</h3>
+                @switch (entity)
+                {
+                    case var e when !string.IsNullOrWhiteSpace(e.Geo):
+                        <h3>ГЕО: @e.Geo</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Date):
+                        <h3>Дата: @e.Date</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Organization):
+                        <h3>Организация: @e.Organization</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Namedentity):
+                        <h3>Наименования: @e.Namedentity</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Person):
+                        <h3>Люди: @e.Person</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Street):
+                        <h3>Улица: @e.Street</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Money):
+                        <h3>Деньги: @e.Money</h3>
+                        break;
+                    case var e when !string.IsNullOrWhiteSpace(e.Address):
+                        <h3>Адрес: @e.Address</h3>
+                        break;
+                    // Добавьте дополнительные case для других свойств, которые вы хотите отобразить
+                    default:
+                        // Обработка, если ни одно из свойств не прошло проверку
+                        break;
+                }
             }
             else
             {
