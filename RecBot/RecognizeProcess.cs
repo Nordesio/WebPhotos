@@ -95,7 +95,8 @@ namespace RecBot
             Process process = new Process();
             process.StartInfo = new ProcessStartInfo();
 #if DEBUG
-            process.StartInfo.FileName = @"C:\Users\Влад\AppData\Local\Programs\Python\Python310\python.exe";
+            //С РАЗНЫХ ПК НЕОБХОДИМО МЕНЯТЬ ПУТЬ
+            process.StartInfo.FileName = @"C:\Users\vladg\AppData\Local\Programs\Python\Python310\python.exe";
 #else
             process.StartInfo.FileName = @"C:\Users\Админ\AppData\Local\Programs\Python\Python37\python.exe";
 #endif
