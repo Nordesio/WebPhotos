@@ -35,10 +35,10 @@ namespace KPO_Cursovaya.Tests
 
             // Нахождение элементов на странице и взаимодействие с ними
             IWebElement emailField = _driver.FindElement(By.Name("Email"));
-            emailField.SendKeys("vladgus02@mail.ru");
+            emailField.SendKeys("vladgus02@inbox.ru");
 
             IWebElement passwordField = _driver.FindElement(By.Name("Password"));
-            passwordField.SendKeys("111111");
+            passwordField.SendKeys("1111");
 
             IWebElement loginButton = _driver.FindElement(By.ClassName("login100-form-btn"));
             loginButton.Click();
@@ -89,10 +89,10 @@ namespace KPO_Cursovaya.Tests
 
             // Нахождение элементов на странице и взаимодействие с ними
             IWebElement emailField = _driver.FindElement(By.Name("Email"));
-            emailField.SendKeys("vladgus02@mail.ru");
+            emailField.SendKeys("vladgus02@inbox.ru");
 
             IWebElement passwordField = _driver.FindElement(By.Name("Password"));
-            passwordField.SendKeys("111111");
+            passwordField.SendKeys("1111");
 
             IWebElement loginButton = _driver.FindElement(By.ClassName("login100-form-btn"));
             loginButton.Click();
@@ -113,6 +113,44 @@ namespace KPO_Cursovaya.Tests
             var vkUsersPageTitle = wait.Until(driver => driver.FindElement(By.CssSelector($".dataPanel.search_vk[data-vk-id='NewTest']")));
             
             Assert.NotNull(vkUsersPageTitle);
+        }
+        [Fact]
+        public void TestCheckStatistic()
+        {
+            // Открытие страницы в браузере
+            _driver.Navigate().GoToUrl(_baseUrl);
+
+            // Дождемся загрузки элементов
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            wait.Until(driver => driver.FindElement(By.Name("Email")));
+
+            // Нахождение элементов на странице и взаимодействие с ними
+            IWebElement emailField = _driver.FindElement(By.Name("Email"));
+            emailField.SendKeys("admin");
+
+            IWebElement passwordField = _driver.FindElement(By.Name("Password"));
+            passwordField.SendKeys("1111");
+
+            IWebElement loginButton = _driver.FindElement(By.ClassName("login100-form-btn"));
+            loginButton.Click();
+
+            // Дождемся перехода на другую страницу
+            var profilePageTitle = wait.Until(driver => driver.FindElement(By.TagName("h2")));
+            _driver.Navigate().GoToUrl(_baseUrl + "Vk");
+
+            // Дождемся загрузки страницы Vk
+            wait.Until(driver => driver.FindElement(By.CssSelector(".dataPanel.search_vk")));
+
+            // Найдем элемент кнопки "Статистика" для запроса "For statistic"
+            IWebElement statisticButton = _driver.FindElement(By.XPath("//span[text()='Статистика']"));
+
+            // Кликнем на кнопку "Статистика"
+            statisticButton.Click();
+
+            // Дождемся загрузки страницы статистики
+            wait.Until(driver => driver.FindElement(By.Id("entityChart")));
+
+            Assert.True(true);
         }
         public void Dispose()
         {

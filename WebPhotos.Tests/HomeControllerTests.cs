@@ -33,7 +33,7 @@ namespace KPO_Cursovaya.Tests
             var validPassRepeat = "NewPassword123";
 
             // Установка auth_user для проверки аутентификации пользователя
-            var auth_user = new User { Id = 2, Name = "vlad", Email = "vladgus02@mail.ru", EmailConfirmed = true, Password = "$2a$12$VmullPZdwP3zgkctdrGSt.82kOhpr85QLiELxABveaIQbJOqNB4fG", Role = "user" };
+            var auth_user = new User { Id = 1, Name = "vlad", Email = "vladgus02@mail.ru", EmailConfirmed = true, Password = "$2a$12$wcOYafjgV4tHyrAgWRgGoeD6zi.EB7VT15SDH9KWLQeikta6nBP8a", Role = "user" };
             HomeController.auth_user = auth_user;
 
             // Настройка моков
@@ -144,7 +144,7 @@ namespace KPO_Cursovaya.Tests
             var controller = new HomeController(userStorageMock.Object, passwordHashServiceMock.Object, authenticationServiceMock.Object);
 
             // Act
-            var result = await controller.Index("vladgus02@mail.ru", "111111") as RedirectToActionResult;
+            var result = await controller.Index("vladgus02@mail.ru", "1111") as RedirectToActionResult;
 
             // Assert
             Assert.NotNull(result);
@@ -175,8 +175,62 @@ namespace KPO_Cursovaya.Tests
             // Assert
             Assert.NotNull(result);
             Assert.Equal("DoubleAuth", result.ActionName);
-            // Add more assertions based on your expected behavior
+
         }
+        // Тестирование удаления через администратора
+        [Fact]
+        public async Task Delete_ValidInput_ViaAdministrator()
+        {
+            // Arrange
+            var userStorageMock = new Mock<IUserStorage>();
+            var passwordHashServiceMock = new Mock<IPasswordHashService>();
+
+            var controller = new AdminController(userStorageMock.Object, passwordHashServiceMock.Object);
+
+            var userId = 1; // Замените на ID пользователя, которого вы хотите удалить
+
+            userStorageMock.Setup(storage => storage.GetById(userId)).Returns(new User { Id = userId });
+
+            // Act
+            var result = await controller.UserDelete(userId) as ViewResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<User>(result.Model); // Проверяем, что модель передана в представление
+        }
+        // Тестирование редактирования через администратора
+        [Fact]
+        public async Task Edit_ValidInput_ViaAdministrator()
+        {
+            // Arrange
+            var userStorageMock = new Mock<IUserStorage>();
+            var passwordHashServiceMock = new Mock<IPasswordHashService>();
+
+            var controller = new AdminController(userStorageMock.Object, passwordHashServiceMock.Object);
+
+            // Создаем фиктивного пользователя для редактирования
+            var userToEdit = new User
+            {
+                Id = 1,
+                Name = "John Doe",
+                Email = "john@example.com",
+                Password = "oldpassword"
+            };
+
+            // Устанавливаем ожидаемое поведение метода GetById для возврата фиктивного пользователя
+            userStorageMock.Setup(storage => storage.GetById(userToEdit.Id)).Returns(userToEdit);
+
+            // Act: Выполняем редактирование пользователя
+            var result = await controller.UserEdit(userToEdit) as RedirectToActionResult;
+
+            // Assert: Проверяем, что контроллер перенаправляет на нужную страницу после редактирования
+            Assert.NotNull(result);
+            Assert.Equal("Index", result.ActionName);
+
+            // Проверяем, что редактирование успешно обновило данные пользователя
+            userStorageMock.Verify(storage => storage.Update(userToEdit), Times.Once);
+        }
+
     }
 
 }
