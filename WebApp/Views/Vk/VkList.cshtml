@@ -69,6 +69,14 @@
 
                         </td>
                         <td colspan="3" align="right">
+
+                                <a href="@Url.Action("VkStatistic", "Vk", new { vk_id = item.Id })" class="img_text_link" style="margin-right: 10px">
+                                    <img class="picEdit" src="~/statistic.png" width="16" height="16" />
+                                    <span>Статистика</span>
+                                </a>
+
+
+
                                 <a href="@Url.Action("EditVkUser", new {vk_id = item.Id})" class="linkText img_text_link">
                                     <img class="picEdit" src="~/cog.png" width="16" height="16" />
                                     <span>Изменить</span>
@@ -141,6 +149,11 @@
 
 
                             <td colspan="3" align="right">
+
+                                <a href="@Url.Action("VkStatistic", "Vk", new { vk_id = item.Id })" class="img_text_link" style="margin-right: 10px">
+                                    <img class="picEdit" src="~/statistic.png" width="16" height="16" />
+                                    <span>Статистика</span>
+                                </a>
 
                                 <a href="@Url.Action("EditVkUser", new { vk_id = item.Id })" class="linkText img_text_link">
                                     <img class="picEdit" src="~/cog.png" width="16" height="16" />

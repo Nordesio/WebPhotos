@@ -45,4 +45,12 @@
     <ProjectReference Include="..\RecBot\RecBot.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Vk\VkStatistic.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Vk\VkStatistic.cshtml" />
+  </ItemGroup>
+
 </Project>

@@ -99,14 +99,16 @@ namespace EP.Server
                             break;
                     }
                 }
-                if(entity.Geo == null && entity.Date == null && entity.Organization == null && entity.Person == null && entity.Street == null && entity.Money == null && entity.Address == null){
-                    
-                }
-                else
-                {
-                    _entityStorage.Insert(entity);
-                }
+
                 
+            }
+            if (entity.Geo == null && entity.Date == null && entity.Organization == null && entity.Person == null && entity.Street == null && entity.Money == null && entity.Address == null)
+            {
+
+            }
+            else
+            {
+                _entityStorage.Insert(entity);
             }
         }
 

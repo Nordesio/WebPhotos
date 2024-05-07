@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using X.PagedList;
 using RecBot;
+using System.Runtime.InteropServices;
 
 
 
@@ -297,7 +298,6 @@ namespace WebApp.Controllers
         // GET: VkController
         public ActionResult Index()
         {
-            
             if (HttpContext.User.IsInRole("user"))
             {
                 //Request req = new Request();
@@ -445,7 +445,87 @@ namespace WebApp.Controllers
             return View(image);
         }
 
+        [Authorize(Roles = "user, admin")]
+        [HttpGet]
+        public ActionResult VkStatistic(int vk_id)
+        {
+            var images = _requestStorage.GetByVkId(vk_id);
+            Dictionary<string, int> entityStatistics = new Dictionary<string, int>();
+            string mostCommonEntity = null;
+            string mostCommonWords = null;
+            int maxEntityCount = 0;
 
+            foreach (var image in images)
+            {
+                Dictionary<string, string> entities = ExtractEntitiesFromPhoto(image.Id);
+                if(entities != null)
+                {
+
+                foreach (var entity in entities)
+                {
+                    if (!entityStatistics.ContainsKey(entity.Key))
+                    {
+                        entityStatistics[entity.Key] = 0;
+                    }
+                    entityStatistics[entity.Key]++;
+
+                    if (entityStatistics[entity.Key] > maxEntityCount)
+                    {
+                        maxEntityCount = entityStatistics[entity.Key];
+                        mostCommonEntity = entity.Key;
+                        mostCommonWords = entity.Value;
+                    }
+                }
+                
+                }
+            }
+            ViewBag.mostCommonEntity = mostCommonEntity;
+            ViewBag.mostCommonWords = mostCommonWords;
+            return View(entityStatistics);
+        }
+        public Dictionary<string, string> ExtractEntitiesFromPhoto(int image_id)
+        {
+            Dictionary<string, string> entities = new Dictionary<string, string>();
+            var entity = _entityStorage.GetByRequestId(image_id);
+            if( entity != null )
+            {
+
+            if (entity.Geo != null)
+            {
+                entities.Add("Геолокация", entity.Geo);
+            }
+            if (entity.Date != null)
+            {
+                entities.Add("Дата", entity.Date);
+            }
+            if (entity.Organization != null)
+            {
+                entities.Add("Организация", entity.Organization);
+            }
+            if (entity.Namedentity != null)
+            {
+                entities.Add("Наименование", entity.Namedentity);
+            }
+            if (entity.Person != null)
+            {
+                entities.Add("Личность", entity.Person);
+            }
+            if (entity.Street != null)
+            {
+                entities.Add("Улица", entity.Street);
+            }
+            if (entity.Money != null)
+            {
+                entities.Add("Валюта", entity.Money);
+            }
+            if (entity.Address != null)
+            {
+                entities.Add("Адрес", entity.Address);
+            }
+
+            }
+            return entities;
+        }
 
     }
 }

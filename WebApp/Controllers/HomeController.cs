@@ -21,7 +21,7 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public static string token = "vk1.a.zAMJkM_INfiEG_0JkSWqwp4rjfGTA-ffeL8EmwnD3dlpUQXVJsPRKfjRc7xd4OIYZ2UdOBVLWAxc1HUM-lHfb8v5Iy1f1CDNMJSfQqClyTygDecuJEwtSKef_8PjfnjX-rhI4qbESK20oxiY7VihDfkDHr9bhi3Z5wkohI8eY-AH-MyI5tW9bMRVEut6bwAc54pD5h7NlEDXa04bopnQZQ";
+        public static string token = "vk1.a.5LeMmhdBGcpI1FeTYvTbtR4i1fM15tSmaGAJQdpFuoFRgWcpgT9gNv5sJkYSP0TAdRtC5oXcy-EMFuxbYWhEz0fW8z5QYlaaApQ9UMoG4KYToJ1ECZUAxoEKI_xPJGHs-V_T_Ms1Fhp0XrPM9oaGviW5gnWwqJiSQQue9EsPYueMaj01ucHcF52ltvhnkHd-LMuZVbCXrqZv0exVdI2boA";
         private readonly IUserStorage _userStorage;
         public static User auth_user = null;
         private static User pre_registration_user;
