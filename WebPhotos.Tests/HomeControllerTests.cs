@@ -79,18 +79,18 @@ namespace KPO_Cursovaya.Tests
         {
             // Arrange
             var email = "vladgus02@mail.ru";
-            var correctPassword = "correctPassword"; // Правильный пароль
+            var correctPassword = "correctPassword"; 
 
             var userStorageMock = new Mock<IUserStorage>();
             var passwordHashServiceMock = new Mock<WebApp.IPasswordHashService>();
             var authenticationServiceMock = new Mock<WebApp.IAuthenticationService>();
 
-            var user = new User { Email = email, Password = correctPassword }; // Подставляем правильный пароль
+            var user = new User { Email = email, Password = correctPassword };
             userStorageMock.Setup(storage => storage.GetByEmail(It.IsAny<User>())).Returns(user);
 
-            // Подставляем хэшированный пароль
+            
             passwordHashServiceMock.Setup(service => service.VerifyPassword(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string password, string hashedPassword) => password == correctPassword); // Сравниваем входной пароль с правильным
+                .Returns((string password, string hashedPassword) => password == correctPassword); 
 
             var controller = new HomeController(userStorageMock.Object, passwordHashServiceMock.Object, authenticationServiceMock.Object);
 
@@ -187,7 +187,7 @@ namespace KPO_Cursovaya.Tests
 
             var controller = new AdminController(userStorageMock.Object, passwordHashServiceMock.Object);
 
-            var userId = 1; // Замените на ID пользователя, которого вы хотите удалить
+            var userId = 1; 
 
             userStorageMock.Setup(storage => storage.GetById(userId)).Returns(new User { Id = userId });
 
@@ -196,7 +196,7 @@ namespace KPO_Cursovaya.Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<User>(result.Model); // Проверяем, что модель передана в представление
+            Assert.IsType<User>(result.Model); 
         }
         // Тестирование редактирования через администратора
         [Fact]
@@ -208,7 +208,7 @@ namespace KPO_Cursovaya.Tests
 
             var controller = new AdminController(userStorageMock.Object, passwordHashServiceMock.Object);
 
-            // Создаем фиктивного пользователя для редактирования
+            
             var userToEdit = new User
             {
                 Id = 1,
@@ -217,13 +217,13 @@ namespace KPO_Cursovaya.Tests
                 Password = "oldpassword"
             };
 
-            // Устанавливаем ожидаемое поведение метода GetById для возврата фиктивного пользователя
+            
             userStorageMock.Setup(storage => storage.GetById(userToEdit.Id)).Returns(userToEdit);
 
-            // Act: Выполняем редактирование пользователя
+            
             var result = await controller.UserEdit(userToEdit) as RedirectToActionResult;
 
-            // Assert: Проверяем, что контроллер перенаправляет на нужную страницу после редактирования
+           
             Assert.NotNull(result);
             Assert.Equal("Index", result.ActionName);
 
